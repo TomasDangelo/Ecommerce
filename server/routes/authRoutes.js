@@ -1,22 +1,11 @@
 const router = require("express").Router();
 const User = require("../models/userModel")
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { login, register } = require("../controllers/authController");
 
-router.post("/register", async(req, res) =>{
-    try {
-        const newUser = new User({ //Obtener datos del usuario para autenticacion
-            username: req.body.username,
-            email: req.body.email,
-            password: req.body.password
-        })
-        const user = await newUser.save(); //Crear nuevo usuario
-        res.status(200).json({
-            message: "Usuario creado exitosamente",
-            data: newUser
-        })
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "Error en el Server "});
-    }
-} )
+//Rutas a los métodos manejados en el authController.
+router.post("/register", register)
+router.post("/login", login)
 
 module.exports = router;
