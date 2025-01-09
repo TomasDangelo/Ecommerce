@@ -27,7 +27,6 @@ const register = async(req, res) =>{ //Nuevo usuario
 const login = async(req,res)=>{ // Autenticamos si el usuario existe o no en caso de login
     try {
 
-
     const user = await User.findOne({email: req.body.email});
     if (!user) {
         return res.status(401).json({ message: "Email no encontrado o registrado" });
@@ -36,7 +35,7 @@ const login = async(req,res)=>{ // Autenticamos si el usuario existe o no en cas
     if(!validPassword) {
         return res.status(401).json({ message: "Email o contraseña incorrecta" });
     }
-    const token = jwt.sign({ id: user._id, isAdmin: user.IsAdmin }, process.env.JWT_KEY, { expiresIn: '5d' }); //JWT -- Autenticación
+    const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_KEY, { expiresIn: '5d' }); //JWT -- Autenticación
     const {password, ...info} = user._doc;
 
 
