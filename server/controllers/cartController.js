@@ -23,7 +23,7 @@ const updateCart = async (req,res) =>{
 const deleteCart = async (req,res) =>{
   try {
     const deletedCart = await Cart.findByIdAndDelete(req.params.id)
-    res.status(200).json({message: "Carrito eliminado exitosamente"})
+    res.status(200).json({message: "Carrito eliminado exitosamente", deletedCart})
   } catch (error) {
     console.error(error);
         res.status(500).json({ message: "Error en el Server - Carrito no eliminado", error: error });
@@ -32,7 +32,7 @@ const deleteCart = async (req,res) =>{
 
 const getCartItem = async (req,res) => {
   try {
-    const cartItem = await Cart.findById(req.params.id)
+    const cartItem = await Cart.findOne({userId: req.params.id})
     res.status(200).json({message:"Carrito obtenido exitosamente: ", cartItem })
   } catch (error) {
     console.error(error);
