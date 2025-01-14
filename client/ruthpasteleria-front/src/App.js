@@ -7,6 +7,7 @@ import ProductosPage from './pages/ProductosPage';
 import ProductosDetalle from './pages/ProductosDetalle';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme'
+import Cart from './components/Cart';
 
 // Importar otras páginas aquí
 
@@ -20,7 +21,7 @@ function App() {
           <Route path="/productos" element={<ProductosPage />}/>
           <Route path="/productos/:id" element={<ProductosDetalle />}/>
           <Route path="/contacto" element={<ContactoPage />}/>
-
+          <Route path="/carrito" element={<Cart/>}/>
         </Routes>
       </Layout>
     </Router>

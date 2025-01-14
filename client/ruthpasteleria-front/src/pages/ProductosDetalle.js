@@ -1,29 +1,64 @@
-import {React, useState, useEffect} from 'react';
+import { React, useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from  'axios'
-function ProductDetail() {
-  const { id } = useParams();
-  const [product, setProduct] = useState(null)
-  
-  useEffect(() => {
-    axios.get(`/api/products/${id}`)
-    .then(response =>{
-        setProduct(response.data)
-    })
-    .catch(error => {
-        console.error("Error obteniendo detalles del producto", error)
-    })
-  },[id])
+import { CartContext } from '../context/CartContext';
+import { Button, Typography, Card, CardContent } from '@mui/material';
+import axios from 'axios';
 
-  if (!product) return <h1>Cargando detalles del producto...</h1>
+const ProductDetail = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const { dispatch } = useContext(CartContext);
+
+  // Cargar detalles del producto
+  useEffect(() => {
+    axios
+      .get(`/api/products/${id}`)
+      .then((response) => {
+        setProduct(response.data);
+      })
+      .catch((error) => {
+        console.error('Error obteniendo detalles del producto', error);
+      });
+  }, [id]);
+
+  // Agregar al carrito
+  const handleAddToCart = () => {
+    if (product) {
+      const productToAdd = {
+        id: product._id,
+        name: product.name,
+        price: product.price,
+        quantity: 1,  // Se puede modificar según la lógica
+      };
+      dispatch({ type: 'ADD_TO_CART', payload: productToAdd });
+      axios.post('/api/cart', {product}
+        .then(res=> {
+          console.log('Producto agregado al carrito:', res.data);
+        })
+        .catch(error=> {
+          console.error('Error agregando producto al carrito:', error);
+        })
+      )
+    }
+  };
+
+  // Mostrar mientras se cargan los detalles
+  if (!product) return <h1>Cargando detalles del producto...</h1>;
+
   return (
     <div>
-      <h1>{product.name}</h1>
-      <p>{product.description}</p>
-      <p>Precio: {product.price}</p>
-      {/* Muestra más detalles del producto */}
+      <Card>
+        <CardContent>
+          <Typography variant="h5">{product.name}</Typography>
+          <Typography variant="body1">{product.description}</Typography>
+          <Typography variant="h6">Precio: ${product.price}</Typography>
+          <Button variant="contained" color="primary" onClick={handleAddToCart}>
+            Agregar al Carrito
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   );
-}
+};
 
 export default ProductDetail;

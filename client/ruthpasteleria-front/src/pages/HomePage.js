@@ -1,5 +1,5 @@
 import {React, useEffect, useState} from 'react';
-import { Container, Grid, Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { Box,  Card, CardMedia, CardContent, Typography } from '@mui/material';
 import axios from "axios"
 import { Link } from 'react-router-dom';
 
@@ -20,34 +20,23 @@ const HomePage = () => {
 
 
   return (
-    <Container>
-      <Typography variant="h4" gutterBottom>
-        Productos de Pastelería
-      </Typography>
-      <Grid container spacing={3}>
-        {products.map(product => (
-          <Grid item key={product._id} xs={12} sm={6} md={4}>
-            <Card>
-              <CardMedia
-                component="img"
-                height="140"
-                image={product.image}
-                alt={product.name}
-              />
-              <CardContent>
-                <Typography variant="h5" component="div">
-                  {product.name}
-                </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {product.description}
-                </Typography>
-                <Link to={`/productos/${product._id}`}>Ver Detalles</Link>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-    </Container>
+    <Box display="grid" gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={3}>
+  {products.map(product => (
+    <Card key={product._id}>
+      <CardMedia
+        component="img"
+        height="140"
+        image={product.image}
+        alt={product.name}
+      />
+      <CardContent>
+        <Typography variant="h5">{product.name}</Typography>
+        <Typography variant="body2">{product.description}</Typography>
+        <Link to={`/productos/${product._id}`}>Ver Detalles</Link>
+      </CardContent>
+    </Card>
+  ))}
+</Box>
   );
 };
 
