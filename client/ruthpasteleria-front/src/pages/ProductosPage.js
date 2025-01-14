@@ -8,7 +8,7 @@ const ProductosPage = () => {
         Nuestros Productos
       </Typography>
       <Typography variant="body1">
-        Aquí encontrarás una variedad de productos frescos y deliciosos.
+        Contamos con una gran variedad de productos frescos elaborados artesanalmente.
       </Typography>
     </Container>
   );
