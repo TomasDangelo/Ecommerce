@@ -9,7 +9,7 @@ const cors = require('cors');
 
 
 app.use(express.json()); //Configuración para aceptar solicitudes json
-app.use(cors()); // Permite todas las solicitudes CORS
+app.use(cors({ origin: 'http://localhost:3000' })); // Permite todas las solicitudes CORS
 //-----------------------------------------------------------------------------//
 app.use("/", routes);
 app.get("/", (req,res)=>{

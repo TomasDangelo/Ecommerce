@@ -57,7 +57,7 @@ const getProducts = async (req,res) =>{
       product = await Product.find({categories: {$in: [qcategory] }}).sort({createdAt: -1 })
     }
     else{
-      product = await Product.find()
+      product = await Product.find({})
     }
     res.status(200).json({message:"Productos obtenidos exitosamente: ", product })
   } catch (error) {

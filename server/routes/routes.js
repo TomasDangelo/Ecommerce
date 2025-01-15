@@ -5,7 +5,7 @@ const productRoute = require("./productRoute")
 const cartRoute = require("./cartRoute") 
 const orderRoute = require("./orderRoute")
 
-const baseUrl = "/api/v1";
+const baseUrl = "/api/";
 
 router.use(`${baseUrl}/users`, userRoute)
 router.use(`${baseUrl}/auth`, authRoutes)
