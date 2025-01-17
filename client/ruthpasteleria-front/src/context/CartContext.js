@@ -8,6 +8,10 @@ const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
       const itemExists = state.items.find(item => item.id === action.payload.id);
+      if (action.payload.stock < action.payload.quantity){
+        alert("Stock insuficiente")
+        return state;
+      }
       if (itemExists) {
         return {
           ...state,

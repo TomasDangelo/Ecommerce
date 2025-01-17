@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
-import { Button, Typography, List, ListItem, ListItemText, TextField } from '@mui/material';
+import { Button,  List, ListItem, ListItemText, TextField, Typography, Box } from '@mui/material';
 import axios from 'axios';
 
 const Cart = () => {
@@ -25,6 +25,17 @@ const handleUpdateQuantity = (productId, newQuantity) =>{
    .catch(err=>{console.error("Error al actualizar la cantidad del producto", err)});
    }
 
+const CartTotal = () => {
+  const {cart} = useContext(CartContext)
+  const total = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+
+
+  return (
+    <Box fontWeight="fontWeightBold" mb={2}>
+        <Typography variant="h5">Total: ${total.toFixed(2)}</Typography>
+    </Box>
+  );
+}
 
   return (
     <div>
@@ -41,6 +52,7 @@ const handleUpdateQuantity = (productId, newQuantity) =>{
           </ListItem>
         ))}
       </List>
+      <CartTotal />
     </div>
   );
 };

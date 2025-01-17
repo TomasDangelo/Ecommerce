@@ -8,20 +8,19 @@ const ProductDetail = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const { dispatch } = useContext(CartContext);
-
+  
   // Cargar detalles del producto
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/${id}`)
-      .then((response) => {
-        setProduct(response.data.product);
-      })
-      .catch((error) => {
-        console.error('Error obteniendo detalles del producto', error);
-      });
+    .get(`http://localhost:5000/api/products/${id}`)
+    .then((response) => {
+      setProduct(response.data.product);
+    })
+    .catch((error) => {
+      console.error('Error obteniendo detalles del producto', error);
+    });
   }, [id]);
-
-  // Agregar al carrito
+  
   const handleAddToCart = () => {
     if (product) {
       const productToAdd = {
@@ -44,6 +43,7 @@ const ProductDetail = () => {
         });
     }
   };
+  // Agregar al carrito
   
 
   // Mostrar mientras se cargan los detalles
@@ -66,3 +66,5 @@ const ProductDetail = () => {
 };
 
 export default ProductDetail;
+
+

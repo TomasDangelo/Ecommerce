@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Card, CardMedia, CardContent, Typography } from '@mui/material';
+import { Box, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -19,9 +19,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <Box display="grid" gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={3}>
+    <Box display="grid" gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={3} margin="20px">
       {products.map(product => (
-        <Card key={product._id}>
+        <Card key={product._id} sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' } }} style={{cursor: "pointer"}} >
           <CardMedia
             component="img"
             height="140"
@@ -31,9 +31,16 @@ const HomePage = () => {
           <CardContent>
             <Typography variant="h5">{product.name}</Typography>
             <Typography variant="body2">{product.description}</Typography>
-            <Link to={`/productos/${product._id}`}>
-              <Typography variant="body2" color="primary">Ver Detalles</Typography>
+            <Button variant="contained">
+            <Link to={`/productos/${product._id}`} style={{textDecoration: 'none'}}>
+              <Typography variant="body2" style={{color: 'white'}}  >Ver Detalles</Typography>
             </Link>
+            </Button>
+            <Button variant="contained" color='secondary'>
+            <Link to={`/carrito/${product._id}`} style={{textDecoration: 'none'}}>
+              <Typography variant="body2" style={{color: 'white'}}  >Agregar al carrito</Typography>
+            </Link>
+            </Button>
           </CardContent>
         </Card>
       ))}

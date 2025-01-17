@@ -15,6 +15,9 @@ const createProduct = async (req, res) => {
         res.status(500).json({ message: "Error en el Server - Producto no creado", error: error });
     }
 }
+
+
+
 const updateProduct = async (req,res) =>{
   try {
     const updatedProduct = await Product.findByIdAndUpdate(req.params.id,{$set: req.body},{new: true})
