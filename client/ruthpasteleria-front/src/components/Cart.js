@@ -8,8 +8,8 @@ const Cart = () => {
 
 const removeItem = (id) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: { id } });
-    // eslint-disable-next-line no-template-curly-in-string
-    axios.delete(`/api/cart/${id}`)
+
+    axios.delete(`http://localhost:5000/api/cart/${id}`)
     .then(res=>{
         console.log("Producto eliminado de la base de datos")
     })
@@ -28,7 +28,7 @@ const handleUpdateQuantity = (productId, newQuantity) =>{
 
   return (
     <div>
-      <Typography variant="h4">Carrito de Compras</Typography>
+
       <List>
         {cart.items.map(item => (
           <ListItem key={item.id}>

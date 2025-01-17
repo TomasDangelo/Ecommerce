@@ -14,7 +14,7 @@ const ProductDetail = () => {
     axios
       .get(`http://localhost:5000/api/products/${id}`)
       .then((response) => {
-        setProduct(response.data);
+        setProduct(response.data.product);
       })
       .catch((error) => {
         console.error('Error obteniendo detalles del producto', error);
@@ -30,17 +30,21 @@ const ProductDetail = () => {
         price: product.price,
         quantity: 1,  // Se puede modificar según la lógica
       };
+  
+      // Dispatch para actualizar el estado del carrito en el contexto
       dispatch({ type: 'ADD_TO_CART', payload: productToAdd });
-      axios.post('/api/cart', {product}
-        .then(res=> {
+  
+      // Axios post request para agregar el producto al carrito en el backend
+      axios.post('http://localhost:5000/api/cart', { product })
+        .then(res => {
           console.log('Producto agregado al carrito:', res.data);
         })
-        .catch(error=> {
+        .catch(error => {
           console.error('Error agregando producto al carrito:', error);
-        })
-      )
+        });
     }
   };
+  
 
   // Mostrar mientras se cargan los detalles
   if (!product) return <h1>Cargando detalles del producto...</h1>;
