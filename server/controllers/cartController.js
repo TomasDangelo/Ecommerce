@@ -1,4 +1,5 @@
 const Cart = require("../models/cartModel")
+const Product = require("../models/productModel")
 
 const addToCart = async (req,res) =>{
   const {userId, quantity, productId} = req.body;
@@ -6,10 +7,7 @@ const addToCart = async (req,res) =>{
   try {
     const product = await Product.findById(productId);
     if(!product){
-      return res.status(404).json({message: "Producto no encontrado"})  //Control de stock y validación de producto
-    }
-    if (product.stock < quantity){
-      return res.status(400).json({message: "No hay stock suficiente"})
+      return res.status(404).json({message: "Producto no encontrado"})  //Validación de producto
     }
     let cart = await Cart.findOne({userId}) //Busco o creo el carrito si no existe
     if(!cart){
@@ -22,8 +20,6 @@ const addToCart = async (req,res) =>{
       cart.products.push({productId, quantity})
     }
     await cart.save()
-
-    product.stock -= quantity; //Una vez finalizado, restamos la cantidad comprada al stock 
     await product.save()
 
     res.status(200).json({message: "Producto agregado al carrito exitosamente", cart})

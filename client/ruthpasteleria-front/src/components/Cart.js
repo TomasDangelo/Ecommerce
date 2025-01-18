@@ -27,7 +27,7 @@ const handleUpdateQuantity = (productId, newQuantity) =>{
 
 const CartTotal = () => {
   const {cart} = useContext(CartContext)
-  const total = cart.items.reduce((total, item) => total + item.price * item.quantity, 0);
+  const total = cart.items? cart.items.reduce((total, item) => total + item.price * item.quantity, 0) : 0;
 
 
   return (
@@ -41,7 +41,7 @@ const CartTotal = () => {
     <div>
 
       <List>
-        {cart.items.map(item => (
+        {cart.items? cart.items.map(item => (
           <ListItem key={item.id}>
             <ListItemText primary={item.name} secondary={`Cantidad: ${item.quantity}`} />
             <TextField type="number" value={item.quantity} onChange={(e) => handleUpdateQuantity(item.id, parseInt(e.target.value))}
@@ -50,7 +50,7 @@ const CartTotal = () => {
               Eliminar
             </Button>
           </ListItem>
-        ))}
+        )): <Typography variant="h6">Tu carrito está vacío</Typography>}
       </List>
       <CartTotal />
     </div>

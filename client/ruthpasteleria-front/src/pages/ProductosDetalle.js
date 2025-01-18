@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import { Button, Typography, Card, CardContent } from '@mui/material';
 import axios from 'axios';
+import { addToCart } from '../utils/cartUtils';
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -23,27 +24,10 @@ const ProductDetail = () => {
   
   const handleAddToCart = () => {
     if (product) {
-      const productToAdd = {
-        id: product._id,
-        name: product.name,
-        price: product.price,
-        quantity: 1,  // Se puede modificar según la lógica
-      };
-  
-      // Dispatch para actualizar el estado del carrito en el contexto
-      dispatch({ type: 'ADD_TO_CART', payload: productToAdd });
-  
-      // Axios post request para agregar el producto al carrito en el backend
-      axios.post('http://localhost:5000/api/cart', { product })
-        .then(res => {
-          console.log('Producto agregado al carrito:', res.data);
-        })
-        .catch(error => {
-          console.error('Error agregando producto al carrito:', error);
-        });
-    }
+      addToCart(product, dispatch)
   };
-  // Agregar al carrito
+}
+
   
 
   // Mostrar mientras se cargan los detalles

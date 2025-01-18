@@ -7,11 +7,7 @@ export const CartContext = createContext();
 const cartReducer = (state, action) => {
   switch (action.type) {
     case 'ADD_TO_CART':
-      const itemExists = state.items.find(item => item.id === action.payload.id);
-      if (action.payload.stock < action.payload.quantity){
-        alert("Stock insuficiente")
-        return state;
-      }
+      const itemExists = state.items?.find(item => item.id === action.payload.id);
       if (itemExists) {
         return {
           ...state,
@@ -35,10 +31,15 @@ const cartReducer = (state, action) => {
         ...state,
         items: [],
       };
-    case 'UPDATE_QUANTITY':
-      return state.map(product =>
-        product.id === action.payload.productId? { ...product, quantity: action.payload.newQuantity } : product
-      );
+      case 'UPDATE_QUANTITY':
+        return {
+          ...state,
+          items: state.items.map(product =>
+            product.id === action.payload.productId
+              ? { ...product, quantity: action.payload.newQuantity }
+              : product
+          ),
+        };
       
     default:
       return state;
@@ -50,12 +51,15 @@ const cartReducer = (state, action) => {
 export const CartProvider = ({ children }) => {
   const loadCartFromLocalStorage = () => {
     const storedCart = localStorage.getItem('cart'); // Intentar cargar el carrito desde localStorage si existe
-    return storedCart ? JSON.parse(storedCart) : {items: []};
+    const parsedCart = storedCart? JSON.parse(storedCart) : {items: []}
+    return Array.isArray(parsedCart.items) ? parsedCart : {items: []};
   }
   const [state, dispatch] = useReducer(cartReducer, loadCartFromLocalStorage);
 
   useEffect(()=>{
+   if(Array.isArray(state.items)) {
     localStorage.setItem('cart', JSON.stringify(state)); // Guardar el carrito en localStorage cada vez que se actualiza
+  } 
   }, [state])
 
   return (

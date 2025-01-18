@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { Box, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-
+import { addToCart } from '../utils/cartUtils';
+import { CartContext } from '../context/CartContext';
 const HomePage = () => {
   const [products, setProducts] = useState([]);
+  const {dispatch} = useContext(CartContext)
 
-  useEffect(() => {
+    useEffect(() => {
     const fetchProducts = async () => {
       try {
         const response = await axios.get('http://localhost:5000/api/products');
@@ -17,6 +19,10 @@ const HomePage = () => {
     };
     fetchProducts();
   }, []);
+
+  const handleAddToCart = (product) =>{
+      addToCart(product, dispatch)
+  }
 
   return (
     <Box display="grid" gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={3} margin="20px">
@@ -36,7 +42,7 @@ const HomePage = () => {
               <Typography variant="body2" style={{color: 'white'}}  >Ver Detalles</Typography>
             </Link>
             </Button>
-            <Button variant="contained" color='secondary'>
+            <Button variant="contained" color='secondary' onClick={() => handleAddToCart(product)}>
             <Link to={`/carrito/${product._id}`} style={{textDecoration: 'none'}}>
               <Typography variant="body2" style={{color: 'white'}}  >Agregar al carrito</Typography>
             </Link>
