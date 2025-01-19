@@ -1,6 +1,8 @@
-import axios from 'axios'
-
 export const addToCart = async (product, dispatch) =>{
+    if (!product || typeof product != 'object' || !product.id){
+        console.error("Estructura invalida de objecto")
+        return;
+    }
     const productToAdd = {
         id: product._id,
         description: product.description,
@@ -10,11 +12,4 @@ export const addToCart = async (product, dispatch) =>{
         quantity: 1
     }
     dispatch({type: 'ADD_TO_CART', payload: productToAdd})
-    try {
-        const response = await axios.post('http://localhost:5000/api/cart', {product: productToAdd})
-        console.log("Producto agregado al carrito exitosamente", response.data);
-        
-    } catch (error) {
-        console.error("Error agregando producto al carrito", error)
-    }
 }

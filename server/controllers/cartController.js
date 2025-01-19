@@ -1,6 +1,16 @@
 const Cart = require("../models/cartModel")
 const Product = require("../models/productModel")
 
+
+const getCart = async (req, res) => {
+  try {
+    // Ya se asegura en el middleware que el carrito existe
+    res.status(200).json(req.cart);
+  } catch (error) {
+    res.status(500).json({ message: 'Error fetching cart', error });
+  }
+};
+
 const addToCart = async (req,res) =>{
   const {userId, quantity, productId} = req.body;
 
@@ -77,30 +87,6 @@ const deleteCart = async (req,res) =>{
     }
 }
 
-const getCartItem = async (req,res) => {
-  try {
-    const cartItem = await Cart.findOne({userId: req.params.id})
-    if(!cartItem){
-      return res.status(404).json({ message: "Error al obtener, carrito no encontrado" });
-    }
-    res.status(200).json({message:"Carrito obtenido exitosamente: ", cartItem })
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error en el Server - Carrito no encontrado", error: error });
-  }
-}
 
-const getCartItems = async (req,res) =>{
-  try {
-    const cartITems = await Cart.find({})
-    if(!cartITems){
-      return res.status(404).json({ message: "Error al obtener, carritos no encontrados" });
-    }
-    res.status(200).json({message:"Carritos obtenidos exitosamente: ", cartITems })
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error en el Server - Carritos no encontrados", error: error });
-  }
-}
 
-module.exports = {createCart, updateCart, deleteCart, getCartItems, getCartItem, addToCart}
+module.exports = {createCart, updateCart, deleteCart, getCart, addToCart}

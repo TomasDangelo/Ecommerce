@@ -1,7 +1,7 @@
 import { React, useState, useEffect, useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
-import { Button, Typography, Card, CardContent } from '@mui/material';
+import { Button, Typography, Card, CardContent, CardMedia, Box } from '@mui/material';
 import axios from 'axios';
 import { addToCart } from '../utils/cartUtils';
 
@@ -34,18 +34,39 @@ const ProductDetail = () => {
   if (!product) return <h1>Cargando detalles del producto...</h1>;
 
   return (
-    <div>
-      <Card>
-        <CardContent>
-          <Typography variant="h5">{product.name}</Typography>
-          <Typography variant="body1">{product.description}</Typography>
-          <Typography variant="h6">Precio: ${product.price}</Typography>
-          <Button variant="contained" color="primary" onClick={handleAddToCart}>
-            Agregar al Carrito
-          </Button>
-        </CardContent>
-      </Card>
-    </div>
+    <Box 
+  sx={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    maxWidth: '100%',
+    p: 2,
+  }}
+>
+  <Card sx={{ width: '100%', maxWidth: 450 }}>
+    <CardMedia 
+      component="img" 
+      image={product.image || '/default-image.jpg'} 
+      alt={product.title}
+      sx={{
+        height: 'auto',
+        maxHeight: '400px',
+        width: '100%',
+        objectFit: 'cover', // Mantiene las proporciones de la imagen y recorta si es necesario
+        objectPosition: 'center',
+      }}
+    />
+    <CardContent>
+      <Typography variant="h5" gutterBottom>{product.title}</Typography>
+      <Typography variant="body1" gutterBottom>{product.description}</Typography>
+      <Typography variant="h6" gutterBottom>Precio: ${product.price}</Typography>
+      <Button variant="contained" color="primary" onClick={handleAddToCart}>
+        Agregar al Carrito
+      </Button>
+    </CardContent>
+  </Card>
+</Box>
+
   );
 };
 
