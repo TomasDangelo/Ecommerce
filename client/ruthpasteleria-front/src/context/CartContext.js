@@ -1,5 +1,4 @@
 import React, { createContext, useReducer, useEffect } from 'react';
-import Alert from '@mui/material/Alert'
 
 // Crear el contexto
 export const CartContext = createContext();

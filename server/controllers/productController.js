@@ -2,10 +2,12 @@ const Product = require("../models/productModel")
 
 const createProduct = async (req, res) => {
     try {
-    const categories = req.body.categories ? req.body.categories.split(",") : []  // Verificación/Divisón 
+    const { title, description, categories, sizes } = req.body; 
     const newProduct = new Product ({  //Creación del producto
-      ...req.body,
-      categories: categories,
+      title,
+      description,
+      categories,
+      sizes,
       image: req.file.path,
     })
     await newProduct.save();

@@ -12,6 +12,8 @@ app.use(express.json()); //Configuración para aceptar solicitudes json
 app.use(cors({ origin: 'http://localhost:3000' })); // Permite todas las solicitudes CORS
 //-----------------------------------------------------------------------------//
 app.use("/", routes);
+app.use("./uploads", express.static("uploads"))
+
 app.get("/", (req,res)=>{
     res.send("Testeando backend");
 })

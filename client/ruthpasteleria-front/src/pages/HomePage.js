@@ -1,52 +1,53 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { Box, Card, CardMedia, CardContent, Typography, Button } from '@mui/material';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Box, Typography } from '@mui/material';
 import { CartContext } from '../context/CartContext';
+import { ProductContext } from '../context/ProductContext';
+import ProductCard from '../components/ProductCard';
 
 const HomePage = () => {
-  const [products, setProducts] = useState([]);
-  const { updateQuantity,  addToCart} = useContext(CartContext)
+  const { products, loading } = useContext(ProductContext);
+  const { addToCart } = useContext(CartContext);
 
-    useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axios.get('http://localhost:5000/api/products');
-        setProducts(response.data.product); 
-      } catch (error) {
-        console.error('Error obteniendo productos:', error);
-      }
-    };
-    fetchProducts();
-  }, []);
-
+  if (loading) return <Typography>Cargando productos...</Typography>;
 
   return (
-    <Box sx={{display:"flex", flexDirection: {xs: 'column', sm: 'row'}, alignItems: 'center',  gap: 2}} margin="20px">
-      {products.map(product => (
-        <Card key={product._id} sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' } }} style={{cursor: "pointer"}} >
-          <CardMedia
-            component="img"
-            height="200"
-            image={product.image || '/default-image.jpg'} // Imagen por defecto si no está disponible
-            alt={product.name}
-          />
-          <CardContent>
-            <Typography variant="h6" textAlign="center">{product.title}</Typography>
-            <Button variant="contained" fullWidth="true" sx={{margin: {xs: '10px 0', sm: '10px'}}}>
-            <Link to={`/productos/${product._id}`} style={{textDecoration: 'none'}}>
-              <Typography variant="body2" style={{color: 'white'}}  >Ver Detalles</Typography>
-            </Link>
-            </Button>
-            <Button variant="contained" fullWidth="true" sx={{margin: {xs: '10px 0', sm: '10px'}}} color='secondary' onClick={() => addToCart({  id: product._id, title: product.title, price: product.price, size: product.size, // Asegura que cualquier propiedad distintiva se pase
-  image: product.image})}>
-              <Typography variant="body2" style={{color: 'white'}}  >Agregar al carrito</Typography>
-            </Button>
-          </CardContent>
-        </Card>
-      ))}
+    <>
+ <Box
+      sx={{
+display: "flex",
+justifyContent: "center",
+alignItems: "center",
+textAlign: "center",
+background: "linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)", // Gradiente suave
+color: "white",
+padding: "2rem",
+borderRadius: "20px",
+boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+maxWidth: "70%",
+margin: "2rem auto",
+      }}
+    >
+      <Typography
+        variant="h3"
+        sx={{
+          fontWeight: "bold",
+          textShadow: "2px 2px 4px rgba(0,0,0,0.3)", // Sombra para mejor visibilidad
+          letterSpacing: "2px",
+        }}
+      >
+        ¡Bienvenidos a Ruth Pastelería!
+      </Typography>
     </Box>
   );
+    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center", margin: "20px" }}>
+      {products.map(product => (
+        <ProductCard key={product._id} product={product} addToCart={addToCart} />
+      ))}
+    </Box>
+    </>
+  );
 };
+
+
 
 export default HomePage;
