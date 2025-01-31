@@ -9,7 +9,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import theme from './styles/theme'
 import CartPage from './pages/CartPage';
 import NotFound from './pages/CartPage';
-
+import OrderPage from './pages/OrderPage';
 
 
 // Importar otras páginas aquí
@@ -25,6 +25,7 @@ function App() {
           <Route path="/productos/:id" element={<ProductosDetalle />}/>
           <Route path="/contacto" element={<ContactoPage />}/>
           <Route path="/carrito" element={<CartPage/>}/>
+          <Route path="/orden" element={<OrderPage/>}/>
           <Route path="*" element={<NotFound />} />
         </Routes>
       </Layout>

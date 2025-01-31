@@ -23,12 +23,12 @@ color: "white",
 padding: "2rem",
 borderRadius: "20px",
 boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-maxWidth: "70%",
-margin: "2rem auto",
+maxWidth: {xl: "50%", md: "40%", xs: "35%"},
+margin: "0 auto ",
       }}
     >
       <Typography
-        variant="h3"
+        variant="h4"
         sx={{
           fontWeight: "bold",
           textShadow: "2px 2px 4px rgba(0,0,0,0.3)", // Sombra para mejor visibilidad

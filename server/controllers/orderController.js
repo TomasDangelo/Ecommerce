@@ -50,38 +50,4 @@ const getOrders = async (req,res) =>{
   }
 }
 
-const getMonthlyIncome = async (req,res) =>{
-    try {
-        const date = new Date()
-        const lastMonth = new Date(date.setMonth(date.getMonth() - 1))
-        const prevMonth = new Date(
-            new Date(lastMonth.setMonth(lastMonth.getMonth() -1)))
-
-        const monthlyIncome = await Order.aggregate([
-            {
-                $match: {
-                    createdAt: {$gte: prevMonth}
-                }
-            },
-            {
-                $project: {
-                    month: {$month: "$createdAt"},
-                    sales: "$amount"
-                }
-            },
-            {
-                $group: {
-                    _id: "$month",
-                    total: {$sum: "$sales"}
-                }
-            }
- 
-        ])
-        res.status(200).json({ message: "Ingreso mensual obtenido exitosamente", data: monthlyIncome });
-    } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error en el Server - Income no calculado", error: error });
-    }
-}
-
-module.exports = {createOrder, updateOrder, deleteOrder, getOrders, getUserOrder, getMonthlyIncome}
+module.exports = {createOrder, updateOrder, deleteOrder, getOrders, getUserOrder}

@@ -12,9 +12,9 @@ const ProductCard = ({ product, addToCart }) => {
   
     return (
       <Card sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' }, width: 250 }}>
-        <CardMedia component="img" height="250" image={product.image || '/default-image.jpg'} alt={product.title}/>
+        <CardMedia component="img"  sx={{height: {xs: "150px", sm: "200px", xl: "250px" }}} image={product.image || '/default-image.jpg'} alt={product.title}/>
         <CardContent>
-          <Typography variant="button" textAlign="center">{product.title}</Typography>
+          <Typography variant="h6"  textAlign="center" sx={{fontWeight: "bold"}}>{product.title}</Typography>
           
           {/* Selector de tamaño si el producto tiene variantes */}
           {product.sizes.length > 0 && (

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
 import { Button, List, ListItem, TextField, Typography, Box, Paper } from '@mui/material';
+import {Link} from 'react-router-dom'
 
 const Cart = () => {
   const { cart, updateQuantity, removeFromCart, clearCart } = useContext(CartContext);
@@ -8,7 +9,7 @@ const Cart = () => {
   const CartTotal = () => {
     const total = cart.items ? cart.items.reduce((total, item) => total + item.price * item.quantity, 0) : 0;
     return (
-      <Box fontWeight="fontWeightBold" mb={2}>
+      <Box sx={{fontWeight: 'bold'}}mb={2}>
         <Typography variant="h5">Total: ${total.toFixed(2)}</Typography>
       </Box>
     );
@@ -57,7 +58,13 @@ const Cart = () => {
               </ListItem>
             ))}
           </List>
-          <CartTotal />
+          <Box sx={{display: 'flex', alignItems: 'center', justifyContent: 'center', flexDirection: 'column'}}>
+          <CartTotal sx={{textAlign: 'center', fontWeight: 'bold'}} />
+          <Button variant="contained" color="secondary" component={Link} to={"/orden"}> 
+              {/* AGREGAR LINK QUE LLEVE A LA ORDEN --- ----------------  */}
+                      Procesar orden
+          </Button>
+          </Box>
         </>
       ) : (
         <Typography variant="h6">Tu carrito está vacío</Typography>

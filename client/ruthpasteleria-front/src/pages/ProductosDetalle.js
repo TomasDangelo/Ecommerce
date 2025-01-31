@@ -30,9 +30,9 @@ const ProductDetail = () => {
 
   // Usamos ProductCard para mostrar los detalles del producto
   return (
-    <div style={{ padding: '20px', display: 'flex', justifyContent: 'center' }}>
+    <div  style={{ padding: '20px', display: 'flex',  justifyContent: 'center' }}>
       {/* Pasamos el producto y la función handleAddToCart como prop */}
-      <ProductCard product={product} addToCart={handleAddToCart} />
+      <ProductCard  product={product} addToCart={handleAddToCart} />
     </div>
   );
 };

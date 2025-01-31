@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const {Schema} = mongoose;
 
 const orderModel = new Schema({
-    userId: {
-        type: String,
-        required: true,
-    },
     products: [
         {
             productId: {
@@ -29,7 +25,7 @@ const orderModel = new Schema({
     },
     address: {
         type: Object,
-        required: true,
+        required: false,
     }
 },
 {
