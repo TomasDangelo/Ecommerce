@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Product = require("./models/productModel"); // Asegúrate de que la ruta sea correcta
+const Product = require("./models/productModel"); 
 const dotenv = require("dotenv")
 dotenv.config();
 

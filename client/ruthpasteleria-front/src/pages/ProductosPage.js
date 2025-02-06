@@ -1,77 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import { Typography, Box, Card, CardContent, CardMedia, Container } from '@mui/material';
-import axios from 'axios';
-import chocotorta from '../assets/chocotorta.jpg'
-import cookies from '../assets/cookies.jpg'
-import alfajor from '../assets/alfajor.jpg'
-import postres from '../assets/postre.jpg'
+import React from 'react';
+import { Typography, Box, Card, CardContent, CardMedia, Container, Grid, Button } from '@mui/material';
+import { motion } from 'framer-motion';
+import chocotorta from '../assets/chocotorta.jpg';
+import cookies from '../assets/cookies.jpg';
+import alfajor from '../assets/alfajor.jpg';
+import postres from '../assets/postre.jpg';
 
-
+const productos = [
+  { id: 1, nombre: 'Tortas', imagen: chocotorta },
+  { id: 2, nombre: 'Alfajores', imagen: alfajor },
+  { id: 3, nombre: 'Cookies', imagen: cookies },
+  { id: 4, nombre: 'Postres individuales', imagen: postres },
+];
 
 const ProductosPage = () => {
-/*   const [products, setProducts] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/api/products/`) // Cambiar el puerto aquí
-      .then((response) => {
-        console.log(response.data.product); // Verificar la respuesta
-        setProducts(response.data.product);
-      })
-      .catch((error) => {
-        console.error('Error obteniendo detalles del producto', error);
-      });
-  }, []); */
-
   return (
     <Container>
-    <Typography variant="h2" component="h4" color="pink" textAlign="center"  gutterBottom>Nuestros Productos</Typography>
-    <Box display="grid" gridTemplateColumns="repeat(auto-fill, minmax(300px, 1fr))" gap={3} margin="20px">
+      <Box sx={{ textAlign: 'center', py: 4 }}>
+        <Typography variant="h3" color="secondary" fontFamily="revert-layer" component={motion.h1} initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} gutterBottom>
+          Nuestros Productos
+        </Typography>
+      </Box>
 
-  {/* Producto 1 */}
-  <Card sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' } }} style={{ cursor: "pointer" }}>
-    <CardMedia component="img" height="200" image={chocotorta} alt="Tortas" />
-    <CardContent>
-      <Typography variant="h5">Tortas</Typography>
-    </CardContent>
-  </Card>
-
-  {/* Producto 2 */}
-  <Card sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' } }} style={{ cursor: "pointer" }}>
-    <CardMedia component="img" height="200" image={alfajor} alt="Alfajores" />
-    <CardContent>
-      <Typography variant="h5">Alfajores</Typography>
-    </CardContent>
-  </Card>
-
-  {/* Producto 3 */}
-  <Card sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' } }} style={{ cursor: "pointer" }}>
-    <CardMedia component="img" height="200" image={cookies} alt="Cookies" />
-    <CardContent>
-      <Typography variant="h5">Cookies</Typography>
-    </CardContent>
-  </Card>
-
-  {/* Producto 4 */}
-  <Card sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' } }} style={{ cursor: "pointer" }}>
-    <CardMedia component="img" height="200" image={postres} alt="Postres individuales" />
-    <CardContent>
-      <Typography variant="h5">Postres individuales</Typography>
-    </CardContent>
-  </Card>
-
-  {/* Producto 5 */}
-  <Card sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' } }} style={{ cursor: "pointer" }}>
-    <CardMedia component="img" height="200" image={'/ruta-de-tu-imagen/catering.jpg'} alt="Catering salado" />
-    <CardContent>
-      <Typography variant="h5">Catering salado</Typography>
-    </CardContent>
-  </Card>
-</Box>
-</Container>
-    
-
-
+      <Grid container spacing={4} justifyContent="center">
+        {productos.map((producto) => (
+          <Grid item key={producto.id} xs={12} sm={6} md={4} lg={3}>
+            <motion.div whileHover={{ scale: 1.05 }} transition={{ duration: 0.3 }}>
+              <Card sx={{ boxShadow: 3, borderRadius: 3 }}>
+                <CardMedia component="img" height="290" image={producto.imagen} alt={producto.nombre} />
+                <CardContent>
+                  <Typography variant="h5" textAlign="center">{producto.nombre}</Typography>
+                </CardContent>
+              </Card>
+            </motion.div>
+          </Grid>
+        ))}
+      </Grid>
+    </Container>
   );
 };
 

@@ -1,8 +1,21 @@
 import React, {useState} from 'react';
-import { AppBar, Toolbar, Typography, Button, Box, IconButton, Drawer, List, ListItem, ListItemText  } from '@mui/material'
+import { AppBar, Toolbar, Button, Box, IconButton, Drawer, List, styled, ListItem, ListItemText  } from '@mui/material'
 import { Link } from "react-router-dom"
 import {Menu as MenuIcon} from '@mui/icons-material';
 import logoRuth from '../assets/ruth-logo.jpg'
+
+const StyledLink = styled(Link)(({ theme }) => ({
+  textDecoration: 'none', 
+  color: 'black', 
+  transition: 'background-color 0.3s ease-in-out', 
+  padding: theme.spacing(1, 2), 
+  borderRadius: theme.shape.borderRadius, 
+  '&:hover': {
+    backgroundColor: 'pink', 
+    color: 'black', 
+  },
+}));
+
 const Header = () => {
     const [open, setOpen] = useState(false)
 
@@ -11,14 +24,14 @@ const Header = () => {
       <AppBar color="primary" position="static">
         <Toolbar>
         <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, alignItems: 'center', flexGrow: 1 }}>
-          <img src={logoRuth} alt="Logo" style={{ height: '50px', width: 'auto',  mixBlendMode: 'multiply' }} />
-          <Typography variant="h6" sx={{ml: 2}}> Ruth Pastelería</Typography>
+          <img src={logoRuth} alt="Logo" style={{ height: '5rem', width: 'auto',  mixBlendMode: 'multiply', borderRadius: '0.5rem' }} />
+          {/* <Typography variant="h4" fontFamily="sans" fontWeight="bold" sx={{ml: 2}}> Ruth Pastelería</Typography> */}
         </Box>
-        <Box sx={{display: {xs: 'none', md: 'flex'}}}>
-          <Button color="secondary" component={Link} to="/">Inicio</Button>
-          <Button color="secondary" component={Link} to="/productos">Productos</Button>
-          <Button color="secondary" component={Link} to="/contacto">Contacto</Button>
-          <Button color="secondary" component={Link} to="/carrito">Carrito</Button>
+        <Box sx={{display: {xs: 'none', md: 'flex'}, gap: '1rem'}}>
+          <Button color="black" component={StyledLink} sx={{transition: 'transform 0.3s ease-in-out' ,  '&:hover': { transform: 'backgroundColor: pink' },  }} to="/">Inicio</Button>
+          <Button color="black" component={StyledLink} to="/productos">Productos</Button>
+          <Button color="black" component={StyledLink} to="/contacto">Contacto</Button>
+          <Button color="black" component={StyledLink} to="/carrito">Carrito</Button>
         </Box>
         <IconButton color="secondary" sx={{display: {xs: 'block', md: 'none'}}} onClick={()=> setOpen(true)}>
           <MenuIcon/>

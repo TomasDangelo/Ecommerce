@@ -1,53 +1,60 @@
-import React, { useContext } from 'react';
-import { Box, Typography } from '@mui/material';
+import React, { useContext, useState } from 'react';
+import { Box, Typography, FormControl, InputLabel, Select, MenuItem } from '@mui/material';
 import { CartContext } from '../context/CartContext';
 import { ProductContext } from '../context/ProductContext';
 import ProductCard from '../components/ProductCard';
+import CentralSection from '../components/CentralSection';
 
 const HomePage = () => {
   const { products, loading } = useContext(ProductContext);
   const { addToCart } = useContext(CartContext);
+  const [selectedCategory, setSelectedCategory] = useState('');
+
+  // Obtener todas las categorías únicas de todos los productos
+  const allCategories = products
+    ? products.flatMap(product => product.categories).filter((cat, index, self) => self.indexOf(cat) === index) : [];
+
+  const handleCategoryChange = (e) => {
+    setSelectedCategory(e.target.value);
+  };
+
+  const filteredProducts = selectedCategory
+    ? products.filter(product => product.categories.includes(selectedCategory))
+    : products;
 
   if (loading) return <Typography>Cargando productos...</Typography>;
 
   return (
     <>
- <Box
-      sx={{
-display: "flex",
-justifyContent: "center",
-alignItems: "center",
-textAlign: "center",
-background: "linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%)", // Gradiente suave
-color: "white",
-padding: "2rem",
-borderRadius: "20px",
-boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
-maxWidth: {xl: "50%", md: "40%", xs: "35%"},
-margin: "0 auto ",
-      }}
-    >
-      <Typography
-        variant="h4"
-        sx={{
-          fontWeight: "bold",
-          textShadow: "2px 2px 4px rgba(0,0,0,0.3)", // Sombra para mejor visibilidad
-          letterSpacing: "2px",
-        }}
-      >
-        ¡Bienvenidos a Ruth Pastelería!
+      <CentralSection />
+      <Typography textAlign="center" variant="h4" color="initial" sx={{mt: 2}}>
+        Conoce nuestros productos!
       </Typography>
-    </Box>
-  );
-    <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, justifyContent: "center", margin: "20px" }}>
-      {products.map(product => (
-        <ProductCard key={product._id} product={product} addToCart={addToCart} />
-      ))}
-    </Box>
+
+      <FormControl sx={{ mt: 2, mb: 2, width: '200px', mx: 'auto' }}>
+        <InputLabel id="category-label">Filtrar por categoría</InputLabel>
+        <Select labelId="category-label" id="category-select" value={selectedCategory} label="Categoría" onChange={handleCategoryChange}
+        >
+          <MenuItem value="">Todas</MenuItem>
+          {allCategories.map(category => (
+            <MenuItem key={category} value={category}>
+              {category}
+            </MenuItem>
+          ))}
+        </Select>
+      </FormControl>
+
+      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center', margin: '20px' }}>
+        {filteredProducts && filteredProducts.length > 0 ? (
+          filteredProducts.map(product => (
+            <ProductCard key={product._id} product={product} addToCart={addToCart} />
+          ))
+        ) : (
+          <Typography>No hay productos en esta categoría.</Typography>
+        )}
+      </Box>
     </>
   );
 };
-
-
 
 export default HomePage;
