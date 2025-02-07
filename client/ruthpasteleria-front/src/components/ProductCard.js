@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
-import { Card, CardMedia, CardContent, Typography, Button, FormControl, InputLabel, Select, MenuItem, Modal, Box } from '@mui/material';
+import { Card, CardMedia, CardContent,  Typography, Button, FormControl, InputLabel, Select, MenuItem, Modal, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
+import HomeIcon from '@mui/icons-material/Home';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import DescriptionIcon from '@mui/icons-material/Description';
+
 
 const ProductCard = ({ product, addToCart, toggleView, detailView }) => {
     const [selectedSize, setSelectedSize] = useState(product.sizes.length > 0 ? product.sizes[0] : null);
@@ -56,8 +60,9 @@ const ProductCard = ({ product, addToCart, toggleView, detailView }) => {
             )}
 
             <Button onClick={toggleView} variant="contained" style={{ display: detailView === true ? 'none' : 'flex' }} fullWidth sx={{ margin: "10px 0" }}>
-              <Link to={`/productos/${product._id}`} style={{ textDecoration: 'none', color: 'white' }}>
-                Ver Detalles
+            <DescriptionIcon></DescriptionIcon> 
+              <Link  to={`/productos/${product._id}`} style={{ textDecoration: 'none', color: 'black', marginLeft: '0.5rem' }}>
+               Ver Detalles
               </Link>
             </Button>
 
@@ -68,13 +73,15 @@ const ProductCard = ({ product, addToCart, toggleView, detailView }) => {
               size: selectedSize?.size || product.sizes[0]?.size,
               image: product.image
             })}>
+              <ShoppingCartIcon></ShoppingCartIcon> 
               Agregar al carrito
             </Button>
             {detailView && (
-              <Button variant="contained" fullWidth color="fifth">
-                <Link to={`/`} style={{ textDecoration: 'none', color: 'black' }}>Volver a inicio</Link>
+              <Button variant="contained" fullWidth color="fifth"><HomeIcon></HomeIcon>
+                <Link to={`/`} style={{ textDecoration: 'none', color: 'black', marginLeft: '0.5rem' }}>  Volver a inicio</Link>
               </Button>
             )}
+
 
           </CardContent>
         </Card>

@@ -26,7 +26,7 @@ const CentralSection = () => {
           sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', textAlign: 'center', color: 'white', padding: '2rem', maxWidth: { xl: '100%', md: '60%', xs: '90%' },  margin: '0 auto', marginTop: '2rem',
           }}
         >
-          <Typography variant="h3" sx={{ fontWeight: 'bold', textWrap: 'nowrap',  fontSize: {xl: '4rem ',md: '3rem', xs: '1.5rem'}, textShadow: '2px 2px 4px rgba(0,0,0,0.3)', letterSpacing: '1px' }}>
+          <Typography variant="primary" sx={{ fontWeight: 'bold', textWrap: 'nowrap',  fontSize: {xl: '4rem ',md: '3rem', xs: '1.5rem'}, textShadow: '2px 2px 4px rgba(0,0,0,0.3)', letterSpacing: '1px' }}>
             ¡Bienvenidos a Ruth Pastelería!
           </Typography>
         </Box>

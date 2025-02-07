@@ -33,7 +33,7 @@ const ContactoPage = () => {
               transition: 'transform 0.3s ease-in-out', 
               '&:hover': { transform: 'scale(1.1)' }, 
             }} />
-            <Typography variant="h4" component="h1" color="primary" gutterBottom sx={{ fontWeight: 'bold' }}>Contactanos</Typography>
+            <Typography variant="secondary" color="primary" gutterBottom sx={{ fontWeight: 'bold', fontSize: {xl: '5rem', md: '3rem', xs: '2rem'} }}>Contactanos</Typography>
 
             <Item>
               <motion.img src={whatsappLogo} alt="WhatsApp" style={{ width: '50px', height: '50px', marginRight: '1rem', borderRadius: '10%', objectFit: 'cover',  transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.1)' } }} whileHover={{ scale: 1.1 }} />
@@ -50,7 +50,7 @@ const ContactoPage = () => {
             </Item>
 
             <Item>
-              <motion.img src={pyLogo} alt="PedidosYa" style={{ width: '50px', height: '50px', marginRight: '1rem', borderRadius: '10%', objectFit: 'cover', transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.1)' } }} whileHover={{ scale: 1.1 }} />
+              <motion.img src={pyLogo} alt="PedidosYa" style={{ width: '45px', height: '45px', marginRight: '1rem', borderRadius: '10%', objectFit: 'cover', transition: 'transform 0.3s ease-in-out', '&:hover': { transform: 'scale(1.1)' } }} whileHover={{ scale: 1.1 }} />
               <a href="https://www.pedidosya.com.ar/restaurantes/rosario/ruth-pasteleria-856d9f6b-c274-47f9-b449-946733ba3010-menu" target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
                 <Typography variant="body1" color="text.primary" sx={{ fontWeight: "500" }}>Pedir en PedidosYa</Typography>
               </a>

@@ -17,8 +17,8 @@ const ProductosPage = () => {
   return (
     <Container>
       <Box sx={{ textAlign: 'center', py: 4 }}>
-        <Typography variant="h3" color="secondary" fontFamily="revert-layer" component={motion.h1} initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} gutterBottom>
-          Nuestros Productos
+        <Typography variant="h2" color="primary" component={motion.h1} initial={{ opacity: 0, y: -50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} gutterBottom>
+          Nuestros productos
         </Typography>
       </Box>
 

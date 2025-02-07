@@ -30,7 +30,7 @@ const Cart = () => {
   return (
     <Box sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: 'calc(100vh - 64px)' }}>
       <CartTitle>
-        <Typography variant="h4" fontWeight="bold">Carrito de compras</Typography>
+        <Typography variant="third" fontWeight="bold" fontSize="2.5rem" >Carrito de compras</Typography>
       </CartTitle>
 
       {cart.items && cart.items.length > 0 ? (
@@ -66,7 +66,7 @@ const Cart = () => {
                       Eliminar
                     </Button>
                     <Button variant="contained" color="primary" onClick={clearCart}>
-                      Limpiar
+                      Limpiar carrito
                     </Button>
                   </Box>
                 </Box>

@@ -1,4 +1,4 @@
-import React, { createContext, useReducer, useEffect } from 'react';
+import React, { createContext, useReducer, useEffect, useState } from 'react';
 
 // Crear el contexto
 export const CartContext = createContext();
@@ -50,6 +50,7 @@ const cartReducer = (state, action) => {
 
 // Proveedor del contexto
 export const CartProvider = ({ children }) => {
+  const [alert, setAlert] = useState(null)
   const initialState = {
     items: [],
   }
@@ -71,7 +72,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = (product) =>{
     dispatch({type: 'ADD_TO_CART', payload: product})
-    alert("Producto agregado al carrito exitosamente")
+    setAlert({type: 'success', message: "Producto agregado al carrito exitosamente!"})
   }
 
   const removeFromCart = (productId) => {
@@ -86,6 +87,10 @@ export const CartProvider = ({ children }) => {
     dispatch({type: 'UPDATE_QUANTITY', payload: {productId, newQuantity}})
   }
 
+  const hanldeCloseAlert = () => {
+    setAlert(null)
+  }
+
   useEffect(()=>{
    if(Array.isArray(state.items)) {
     localStorage.setItem('cart', JSON.stringify(state)); // Guardar el carrito en localStorage cada vez que se actualiza
@@ -93,7 +98,7 @@ export const CartProvider = ({ children }) => {
   }, [state])
 
   return (
-    <CartContext.Provider value={{ cart: state, dispatch, updateQuantity, clearCart, removeFromCart, addToCart }}>
+    <CartContext.Provider value={{ cart: state, dispatch, updateQuantity, clearCart, removeFromCart, addToCart, hanldeCloseAlert, alert }}>
       {children}
     </CartContext.Provider>
   );

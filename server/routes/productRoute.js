@@ -3,7 +3,7 @@ const {parsers} = require ("../utils/cloudinary")
 const { createProduct, updateProduct, deleteProduct, getProduct, getProducts } = require("../controllers/productController")
 const { verifyAdmin } = require("../middleware/verifyToken")
 
-router.post("/", verifyAdmin, parsers.single("image"), createProduct)
+router.post("/", parsers.single("image"), createProduct) /*agregar  VerifyAdmin  */
 router.put("/:id", verifyAdmin, parsers.single("image"),  updateProduct)
 router.delete("/:id", verifyAdmin, deleteProduct)
 router.get("/:id", getProduct)
