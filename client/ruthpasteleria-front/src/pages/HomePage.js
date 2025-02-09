@@ -1,9 +1,10 @@
 import React, { useContext, useState } from 'react';
-import { Box, Typography, FormControl, InputLabel, Select, MenuItem, Alert, Snackbar } from '@mui/material';
+import { Box, Typography, Alert, Snackbar } from '@mui/material';
 import { CartContext } from '../context/CartContext';
 import { ProductContext } from '../context/ProductContext';
 import ProductCard from '../components/ProductCard';
 import CentralSection from '../components/CentralSection';
+import CategoryFilter from '../components/CategoryFilter';
 
 const HomePage = () => {
   const { products, loading } = useContext(ProductContext);
@@ -14,9 +15,9 @@ const HomePage = () => {
   const allCategories = products
     ? products.flatMap(product => product.categories).filter((cat, index, self) => self.indexOf(cat) === index) : [];
 
-  const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value);
-  };
+    const handleCategoryChange = (category) => { 
+      setSelectedCategory(category);
+    };
 
   const filteredProducts = selectedCategory
     ? products.filter(product => product.categories.includes(selectedCategory))
@@ -26,19 +27,9 @@ const HomePage = () => {
 
   return (
     <>
-      <CentralSection />
+      <CentralSection /> {/* Sección de foto central */}
+      <CategoryFilter allCategories={allCategories} onCategoryChange={handleCategoryChange}/>
 
-      <FormControl sx={{ mt: 2, mb: 2, width: '15rem', mx: 1 }}>
-        <InputLabel id="category-label">Categoría</InputLabel>
-        <Select labelId="category-label" id="category-select" value={selectedCategory} label="Categoría" onChange={handleCategoryChange}>
-          <MenuItem value="">Todas</MenuItem>
-          {allCategories.map(category => (
-            <MenuItem key={category} value={category}>
-              {category}
-            </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
       <Typography textAlign="center" variant="h2" color="fourth" sx={{mt: 1, fontSize:{xl: '5rem', md: '2rem', xs: '1rem'}}}>
         Conocé nuestros productos
       </Typography>

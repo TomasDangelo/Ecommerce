@@ -1,16 +1,13 @@
 import React from 'react';
 import { Typography, Box, Card, CardContent, CardMedia, Container, Grid, Button } from '@mui/material';
 import { motion } from 'framer-motion';
-import chocotorta from '../assets/chocotorta.jpg';
-import cookies from '../assets/cookies.jpg';
-import alfajor from '../assets/alfajor.jpg';
-import postres from '../assets/postre.jpg';
+
 
 const productos = [
-  { id: 1, nombre: 'Tortas', imagen: chocotorta },
-  { id: 2, nombre: 'Alfajores', imagen: alfajor },
-  { id: 3, nombre: 'Cookies', imagen: cookies },
-  { id: 4, nombre: 'Postres individuales', imagen: postres },
+  { id: 1, nombre: 'Tortas', imagen: new URL('https://res.cloudinary.com/dui1l3g5y/image/upload/v1738881938/20241123_185344_rh3yqq.jpg') },
+  { id: 2, nombre: 'Alfajores', imagen: new URL('https://res.cloudinary.com/dui1l3g5y/image/upload/v1738881937/20250122_121748_rjcwpa.jpg') },
+  { id: 3, nombre: 'Cookies', imagen: new URL('https://res.cloudinary.com/dui1l3g5y/image/upload/v1738165680/cookies_qqedot.jpg') },
+  { id: 4, nombre: 'Postres individuales', imagen: new URL('https://res.cloudinary.com/dui1l3g5y/image/upload/v1738165680/postre_trlbos.jpg') },
 ];
 
 const ProductosPage = () => {

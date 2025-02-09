@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { Card, CardMedia, CardContent,  Typography, Button, FormControl, InputLabel, Select, MenuItem, Modal, Box } from '@mui/material';
+import { Card, CardContent,  Typography, Button, FormControl, InputLabel, Select, MenuItem, Modal, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import DescriptionIcon from '@mui/icons-material/Description';
-
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCartTwoTone';
+import DescriptionIcon from '@mui/icons-material/DescriptionTwoTone';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
 
 const ProductCard = ({ product, addToCart, toggleView, detailView }) => {
     const [selectedSize, setSelectedSize] = useState(product.sizes.length > 0 ? product.sizes[0] : null);
@@ -26,13 +26,15 @@ const ProductCard = ({ product, addToCart, toggleView, detailView }) => {
     return (
       <>
         <Card sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' }, width: 250 }}>
-          <CardMedia
-            component="img"
-            sx={{ height: { xs: "150px", sm: "200px", xl: "250px" }, cursor: 'pointer' }} // Add cursor pointer
-            image={product.image || '/default-image.jpg'}
-            alt={product.title}
-            onClick={handleImageClick} // Open modal on image click
-          />
+        <Box sx={{ height: { xs: "150px", sm: "200px", xl: "250px" },overflow: 'hidden', display: 'flex', justifyContent: 'center',alignItems: 'center' }}>
+              <LazyLoadImage
+                src={product.image || '/default-image.jpg'}
+                alt={product.title}
+                effect='blur'
+                width="100%" 
+                height="auto" 
+                style={{ objectFit: 'cover', cursor: 'pointer' }} onClick={handleImageClick} />
+        </Box>
           <CardContent>
             <Typography variant="h6" textAlign="center" sx={{ fontWeight: "bold" }}>{product.title}</Typography>
 

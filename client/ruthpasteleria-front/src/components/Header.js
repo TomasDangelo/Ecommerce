@@ -3,6 +3,7 @@ import { AppBar, Toolbar, Button, Box, IconButton, Drawer, List, styled, ListIte
 import { Link } from "react-router-dom"
 import {Menu as MenuIcon} from '@mui/icons-material';
 import logoRuth from '../assets/ruth-logo.jpg'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCartTwoTone';
 
 const StyledLink = styled(Link)(({ theme }) => ({
   textDecoration: 'none', 
@@ -22,16 +23,15 @@ const Header = () => {
     return (
       <>
       <AppBar color="primary" position="static">
-        <Toolbar>
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, alignItems: 'center', flexGrow: 1 }}>
-          <img src={logoRuth} alt="Logo" style={{ height: '5rem', width: 'auto',  mixBlendMode: 'multiply', borderRadius: '0.5rem' }} />
-          {/* <Typography variant="h4" fontFamily="sans" fontWeight="bold" sx={{ml: 2}}> Ruth Pastelería</Typography> */}
+        <Toolbar> 
+        <Box sx={{ display: { xs: 'none', md: 'flex' }, mr: 1, objectFit: 'contain',  alignItems: 'center', flexGrow: 1 }}>
+          <img src={logoRuth} alt="Logo" style={{ height: '4rem', width: 'auto',  mixBlendMode: 'multiply', borderRadius: '0.5rem' }} />
         </Box>
         <Box sx={{display: {xs: 'none', md: 'flex'}, gap: '1rem'}}>
-          <Button color="black" component={StyledLink} sx={{transition: 'transform 0.3s ease-in-out' ,  '&:hover': { transform: 'backgroundColor: pink' },  }} to="/">Inicio</Button>
+          <Button color="black" component={StyledLink}  sx={{transition: 'transform 0.3s ease-in-out' ,  '&:hover': { transform: 'backgroundColor: pink' },  }} to="/">Inicio</Button>
           <Button color="black" component={StyledLink} to="/productos">Productos</Button>
           <Button color="black" component={StyledLink} to="/contacto">Contacto</Button>
-          <Button color="black" component={StyledLink} to="/carrito">Carrito</Button>
+          <Button color="black" component={StyledLink} to="/carrito"> <ShoppingCartIcon></ShoppingCartIcon></Button>
         </Box>
         <IconButton color="secondary" sx={{display: {xs: 'block', md: 'none'}}} onClick={()=> setOpen(true)}>
           <MenuIcon/>
@@ -47,7 +47,7 @@ const Header = () => {
             { text: 'Carrito', path: '/carrito' }
           ].map((item) => (
             <ListItem button key={item.text} component={Link} to={item.path} onClick={() => setOpen(false)}>
-              <ListItemText primary={item.text} />
+              <ListItemText  primary={item.text.toUpperCase()} />
             </ListItem>
           ))}
         </List>

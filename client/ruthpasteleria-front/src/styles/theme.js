@@ -22,7 +22,10 @@ const theme = createTheme({
     primary: {fontFamily: 'Fira Sans'}, 
     h2: {fontFamily: 'Tangerine'},
     secondary: {fontFamily: 'Tangerine'},
-    third: {fontFamily: 'Gowun Dodum'}
+    third: {fontFamily: 'Gowun Dodum'},
+    fourth: {fontFamily: 'Ephesis'},
+    fifth: {fontFamily: 'Whisper'},
+    sixth: {fontFamily: 'Great Vibes'}
   }
 });
 

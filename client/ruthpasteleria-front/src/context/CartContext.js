@@ -41,6 +41,12 @@ const cartReducer = (state, action) => {
               : product
           ),
         };
+      case 'GET_TOTAL':
+        const total = items.reduce((total, item) => total + item.price * item.quantity, 0);
+      return {
+        ...state,
+        total: total,
+      };
       
     default:
       return state;
@@ -87,6 +93,7 @@ export const CartProvider = ({ children }) => {
     dispatch({type: 'UPDATE_QUANTITY', payload: {productId, newQuantity}})
   }
 
+
   const hanldeCloseAlert = () => {
     setAlert(null)
   }
@@ -97,8 +104,12 @@ export const CartProvider = ({ children }) => {
   } 
   }, [state])
 
+  useEffect(()=>{
+    dispatch({type: 'GET_TOTAL'})
+  }, [state.items])
+
   return (
-    <CartContext.Provider value={{ cart: state, dispatch, updateQuantity, clearCart, removeFromCart, addToCart, hanldeCloseAlert, alert }}>
+    <CartContext.Provider value={{ cart: state, dispatch, updateQuantity, clearCart, removeFromCart, addToCart, hanldeCloseAlert, alert, total: state.total }}>
       {children}
     </CartContext.Provider>
   );
