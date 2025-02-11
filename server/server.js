@@ -5,11 +5,14 @@ const routes = require("./routes/routes.js")
 const cors = require('cors');
 
 
-
+const allowedOrigins = [
+    "http://localhost:3000", 
+    "https://ruthpasteleria.vercel.app"
+  ];
 
 
 app.use(express.json()); //Configuración para aceptar solicitudes json
-app.use(cors({ origin: 'http://localhost:3000' })); // Permite todas las solicitudes CORS
+app.use(cors({ origin: allowedOrigins, methods: "GET,POST,PUT,DELETE", credentials: true })); // Permite todas las solicitudes CORS
 //-----------------------------------------------------------------------------//
 app.use("/", routes);
 app.use("./uploads", express.static("uploads"))
