@@ -3,10 +3,10 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#ffd7db', // Color principal
+      main: '#ffd7db', 
     },
     secondary: {
-      main: '#f44336', // Color secundario  
+      main: '#f44336',   
     },
     third: {
       main: '#0064b4', 
@@ -17,6 +17,12 @@ const theme = createTheme({
     fifth: {
       main: '#fff3f5', 
     },
+    sixth: {
+      main: '#F7EBED'
+    }, 
+    seventh: {
+      main: '#8b96ff'
+    }
   },
   typography: {
     primary: {fontFamily: 'Fira Sans'}, 
@@ -25,7 +31,9 @@ const theme = createTheme({
     third: {fontFamily: 'Gowun Dodum'},
     fourth: {fontFamily: 'Ephesis'},
     fifth: {fontFamily: 'Whisper'},
-    sixth: {fontFamily: 'Great Vibes'}
+    sixth: {fontFamily: 'Great Vibes'},
+    seventh: {fontFamily: 'Forum'},
+    eighth: {fontFamily: 'Quicksand'}
   }
 });
 

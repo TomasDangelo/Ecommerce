@@ -12,7 +12,7 @@ const Cart = () => {
 
   return (
     <Box sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: 'calc(100vh - 64px)' }}>
-      <Typography variant="h4" component="h1" sx={{ mb: 4, fontWeight: 'bold' }}>Carrito de compras</Typography>
+      <Typography variant="fourth" sx={{ mb: 4, fontWeight: 'bold', fontSize: {xl: '5rem', md: '4rem', xs: '3.5rem'}}}>Carrito</Typography>
 
       {cart.items && cart.items.length > 0 ? (
         <Grid container spacing={2} sx={{ width: isMobile ? '95%' : '70%', maxWidth: '900px' }}>
@@ -64,14 +64,11 @@ const Cart = () => {
               <Typography variant="h5">Total: ${total.toFixed(2)}</Typography>
             </Box>
             <Box sx={{ display: 'flex', gap: '1rem', mt: 2 }}>
+              <Button variant="contained" color="third" component={Link} to="/orden">
+                <Typography variant="" color="white">Procesar orden</Typography> 
+              </Button>
               <Button variant="contained" color="error" onClick={clearCart}>
                 Limpiar carrito
-              </Button>
-              <Button variant="contained" color="third" component={Link} to="/orden">
-                Procesar orden
-              </Button>
-              <Button variant="contained" color="fifth" component={Link} to="/">
-                Volver a inicio  <HomeIcon />
               </Button>
             </Box>
           </Grid>

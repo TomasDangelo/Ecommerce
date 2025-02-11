@@ -11,17 +11,14 @@ const HomePage = () => {
   const { addToCart, hanldeCloseAlert, alert } = useContext(CartContext);
   const [selectedCategory, setSelectedCategory] = useState('');
 
-  // Obtener todas las categorías únicas de todos los productos
-  const allCategories = products
-    ? products.flatMap(product => product.categories).filter((cat, index, self) => self.indexOf(cat) === index) : [];
-
-    const handleCategoryChange = (category) => { 
+  const allCategories = products ? products.flatMap(product => product.categories).filter((cat, index, self) => self.indexOf(cat) === index) : [];
+  
+  const handleCategoryChange = (category) => { 
       setSelectedCategory(category);
     };
 
   const filteredProducts = selectedCategory
-    ? products.filter(product => product.categories.includes(selectedCategory))
-    : products;
+    ? products.filter(product => product.categories.includes(selectedCategory)) : products;
 
   if (loading) return <Typography>Cargando productos...</Typography>;
 
@@ -30,7 +27,7 @@ const HomePage = () => {
       <CentralSection /> {/* Sección de foto central */}
       <CategoryFilter allCategories={allCategories} onCategoryChange={handleCategoryChange}/>
 
-      <Typography textAlign="center" variant="h2" color="fourth" sx={{mt: 1, fontSize:{xl: '5rem', md: '2rem', xs: '1rem'}}}>
+      <Typography textAlign="center" variant="h2" color="primary" fontWeight="bold" sx={{mt: 1, fontSize:{xl: '5rem', md: '3rem', xs: '2rem'}}}>
         Conocé nuestros productos
       </Typography>
 

@@ -16,9 +16,3 @@ const Layout = ({ children }) => {
 };
 
 export default Layout;
-
-
-/* En caso de poner el bg... :  backgroundImage: `url(${BackgroundImg})`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundAttachment: 'fixed', */
