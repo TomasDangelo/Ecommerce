@@ -27,13 +27,7 @@ const ProductCard = ({ product, addToCart, toggleView, detailView }) => {
       <>
         <Card sx={{ transition: 'transform 0.2s', '&:hover': { transform: 'scale(1.05)' }, width: 250 }}>
         <Box sx={{ height: { xs: "150px", sm: "200px", xl: "250px" },overflow: 'hidden', display: 'flex', justifyContent: 'center',alignItems: 'center' }}>
-              <LazyLoadImage
-                src={product.image || '/default-image.jpg'}
-                alt={product.title}
-                effect='blur'
-                width="100%" 
-                height="auto" 
-                style={{ objectFit: 'cover', cursor: 'pointer' }} onClick={handleImageClick} />
+              <LazyLoadImage src={product.image || '/default-image.jpg'} alt={product.title} effect='blur' width="100%"  height="auto"  style={{ objectFit: 'cover', cursor: 'pointer' }} onClick={handleImageClick} />
         </Box>
           <CardContent>
             <Typography variant="h6" textAlign="center" sx={{ fontWeight: "bold" }}>{product.title}</Typography>

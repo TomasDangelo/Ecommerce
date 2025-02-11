@@ -6,20 +6,10 @@ import whatsappLogo from '../assets/logo-instagram.avif';
 import instagramLogo from '../assets/logo-whatsapp.png';
 import pyLogo from '../assets/PedidosYa_logo.png';
 
-const Item = styled(Box)(({ theme }) => ({
-  display: 'flex',
-  alignItems: 'center',
-  marginBottom: theme.spacing(2),
-  '&:last-child': { marginBottom: 0 }
+const Item = styled(Box)(({ theme }) => ({ display: 'flex', alignItems: 'center', marginBottom: theme.spacing(2), '&:last-child': { marginBottom: 0 }
 }));
 
-const MotionImg = styled(motion.img)({
-  width: '50px',
-  height: '50px',
-  marginRight: '1rem',
-  borderRadius: '10%',
-  objectFit: 'cover',
-  transition: 'transform 0.3s ease-in-out',
+const MotionImg = styled(motion.img)({ width: '50px', height: '50px', marginRight: '1rem', borderRadius: '10%', objectFit: 'cover', transition: 'transform 0.3s ease-in-out',
 });
 
 const ContactoPage = () => {

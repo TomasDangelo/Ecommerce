@@ -9,8 +9,6 @@ const ProductDetail = () => {
   const [product, setProduct] = useState(null);
   const { addToCart } = useContext(CartContext);
   const [detailView, setDetailView] = useState(true);
-
-
   // Cargar detalles del producto
   useEffect(() => {
     axios
@@ -30,7 +28,6 @@ const ProductDetail = () => {
     setDetailView(prev => !prev);
   };
   
-  // Mostrar mientras se cargan los detalles
   if (!product) return <h1>Cargando detalles del producto...</h1>;
 
   // Usamos ProductCard para mostrar los detalles del producto
