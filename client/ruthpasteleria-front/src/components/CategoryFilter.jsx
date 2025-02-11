@@ -12,7 +12,7 @@ const CategoryFilter = ({ allCategories, onCategoryChange }) => {
   return (
     <Box sx={{ mt: 2, mb: 2, display: 'flex', justifyContent: 'center' }}>
       <Stack direction="row" spacing={1}>
-        <Button variant={selectedCategory === '' ? 'contained' : 'outlined'} color="seventh" onClick={() => handleCategoryClick('')}>
+        <Button variant={selectedCategory === '' ? 'contained' : 'outlined'} color="third" onClick={() => handleCategoryClick('')}>
           Todo
         </Button>
         {allCategories.map((category) => (
@@ -20,7 +20,7 @@ const CategoryFilter = ({ allCategories, onCategoryChange }) => {
             key={category}
             variant={selectedCategory === category ? 'contained' : 'outlined'}
             onClick={() => handleCategoryClick(category)}
-            color="seventh"
+            color="third"
           >
             {category}
           </Button>

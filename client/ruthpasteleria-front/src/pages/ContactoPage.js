@@ -23,7 +23,7 @@ const ContactoPage = () => {
         
         <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <motion.img src={ruthLogo} alt="logo-ruthpasteleria" style={{ maxWidth: '200px', borderRadius: '50%', boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.2)' }} whileHover={{ scale: 1.1 }} />
-          <Typography variant="secondary" color="text.secondary" sx={{ fontWeight: 'bold', fontSize: { xl: '5rem', md: '3rem', xs: '2rem' }, mt: 2 }}>Contactanos</Typography>
+          <Typography variant="fourth" color="text.secondary" sx={{ fontWeight: 'bold', fontSize: { xl: '4rem', md: '3rem', xs: '2rem' }, mt: 2 }}>Contactanos</Typography>
 
           {[ 
             { logo: whatsappLogo, text: "Ver en Instagram", link: "https://www.instagram.com/ruthpasteleria/" },

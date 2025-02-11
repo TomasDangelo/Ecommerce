@@ -1,42 +1,30 @@
 import React, { useContext } from 'react';
 import { CartContext } from '../context/CartContext';
-import { Button, List, ListItem, TextField, Typography, Box, Paper, useMediaQuery, useTheme, Grid,
-} from '@mui/material';
+import { Button, List, ListItem, TextField, Typography, Box, Paper, useMediaQuery, useTheme, Grid } from '@mui/material';
 import { Link } from 'react-router-dom';
-import HomeIcon from '@mui/icons-material/Home';
 
 const Cart = () => {
-  const { cart, updateQuantity, removeFromCart, clearCart, total } = useContext(CartContext);
+  const { cart, updateQuantity, clearCart, total } = useContext(CartContext);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <Box sx={{ p: 4, display: 'flex', flexDirection: 'column', alignItems: 'center', minHeight: 'calc(100vh - 64px)' }}>
-      <Typography variant="fourth" sx={{ mb: 4, fontWeight: 'bold', fontSize: {xl: '5rem', md: '4rem', xs: '3.5rem'}}}>Carrito</Typography>
+      <Typography variant="fourth" sx={{ mb: 4, fontWeight: 'bold', textAlign: 'center', fontSize: {xl: '5rem', md: '4rem', xs: '3.5rem'}}}>Carrito</Typography>
 
       {cart.items && cart.items.length > 0 ? (
-        <Grid container spacing={2} sx={{ width: isMobile ? '95%' : '70%', maxWidth: '900px' }}>
-          <Grid item xs={12}>
-            <Grid container spacing={2} alignItems="center" sx={{ borderBottom: '1px solid #ddd', pb: 1 }}>
-              <Grid item xs={3}><Typography variant="subtitle1" fontWeight="bold">Producto</Typography></Grid>
-              <Grid item xs={2}><Typography variant="subtitle1" fontWeight="bold">Tamaño</Typography></Grid>
-              <Grid item xs={2}><Typography variant="subtitle1" fontWeight="bold">Cant.</Typography></Grid>
-              <Grid item xs={2}><Typography variant="subtitle1" fontWeight="bold">Precio</Typography></Grid>
-              <Grid item xs={3} sx={{ textAlign: 'right' }}><Typography variant="subtitle1" fontWeight="bold">Acciones</Typography></Grid>
-            </Grid>
-          </Grid>
-
+        <Grid container spacing={2} sx={{ width: isMobile ? '100%' : '70%', maxWidth: '900px' }}>
           <Grid item xs={12}>
             <List sx={{ p: 0 }}>
               {cart.items.map(item => (
-                <ListItem key={item.id} component={Paper} elevation={2} sx={{ mb: 2, p: 2, borderRadius: 1, border: 'none' }}>
+                <ListItem key={item.id} component={Paper} elevation={2} sx={{ mb: 2, p: 2, borderRadius: 1, border: 'none', flexDirection: isMobile ? 'column' : 'row', alignItems: 'center' }}>
                   <Grid container spacing={2} alignItems="center">
-                    <Grid item xs={3} sx={{ display: 'flex', alignItems: 'center' }}>
+                    <Grid item xs={12} sm={3} sx={{ display: 'flex', alignItems: 'center', justifyContent: isMobile ? 'center' : 'flex-start' }}>
                       <img src={item.image} alt={item.title} style={{ maxHeight: '80px', maxWidth: '80px', marginRight: '1rem', objectFit: 'contain' }} />
-                      <Typography variant="body1">{item.title}</Typography>
+                      <Typography variant="body1" textAlign={isMobile ? 'center' : 'left'}>{item.title}</Typography>
                     </Grid>
-                    <Grid item xs={2}><Typography variant="body1">{item.size}</Typography></Grid>
-                    <Grid item xs={2}>
+                    <Grid item xs={6} sm={2}><Typography variant="body1" textAlign="center">{item.size}</Typography></Grid>
+                    <Grid item xs={6} sm={2} sx={{ display: 'flex', justifyContent: 'center' }}>
                       <TextField
                         type="number"
                         value={item.quantity}
@@ -47,11 +35,8 @@ const Cart = () => {
                         sx={{ width: '60px' }}
                       />
                     </Grid>
-                    <Grid item xs={2}><Typography variant="body1">${(item.price * item.quantity).toFixed(2)}</Typography></Grid>
-                    <Grid item xs={3} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
-                      <Button variant="contained" color="error" onClick={() => removeFromCart(item.id)}>
-                        Eliminar
-                      </Button>
+                    <Grid item xs={12} sm={3} textAlign="center">
+                      <Typography variant="body1">${(item.price * item.quantity).toFixed(2)}</Typography>
                     </Grid>
                   </Grid>
                 </ListItem>
@@ -60,16 +45,10 @@ const Cart = () => {
           </Grid>
 
           <Grid item xs={12} sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column', alignItems: 'center' }}>
-            <Box sx={{ fontWeight: 'bold', mt: 2, textAlign: 'center' }}>
-              <Typography variant="h5">Total: ${total.toFixed(2)}</Typography>
-            </Box>
+            <Typography variant="h5" fontWeight="bold">Total: ${total.toFixed(2)}</Typography>
             <Box sx={{ display: 'flex', gap: '1rem', mt: 2 }}>
-              <Button variant="contained" color="third" component={Link} to="/orden">
-                <Typography variant="" color="white">Procesar orden</Typography> 
-              </Button>
-              <Button variant="contained" color="error" onClick={clearCart}>
-                Limpiar carrito
-              </Button>
+              <Button variant="contained" color="third" sx={{color: 'white'}} component={Link} to="/orden">Procesar orden</Button>
+              <Button variant="contained" color="error" onClick={clearCart}>Limpiar carrito</Button>
             </Box>
           </Grid>
         </Grid>

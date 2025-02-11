@@ -72,7 +72,7 @@ const OrderPage = () => {
         <Box sx={{ mt: 3 }}>
           <Typography variant="h5" fontWeight="bold">Total: ${total.toFixed(2)}</Typography>
           <Typography variant="body2" color="text.secondary" sx={{ mt: 1 }}>
-            Importante: La mayoría de los productos se encargan con una anticipación de 3 días. Por favor, consulte disponibilidad en caso de necesitarlos antes.
+           <b>Importante:</b>  La mayoría de los productos se encargan con una anticipación de 3 días. Por favor, consulte disponibilidad en caso de necesitarlos antes.
           </Typography>
 
           <FormControl fullWidth margin="normal" sx={{ mt: 2 }}>

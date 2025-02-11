@@ -27,7 +27,7 @@ const HomePage = () => {
       <CentralSection /> {/* Sección de foto central */}
       <CategoryFilter allCategories={allCategories} onCategoryChange={handleCategoryChange}/>
 
-      <Typography textAlign="center" variant="h2" color="primary" fontWeight="bold" sx={{mt: 1, fontSize:{xl: '5rem', md: '3rem', xs: '2rem'}}}>
+      <Typography textAlign="center" variant="h2" color="third" fontWeight="bold" sx={{mt: 1, fontSize:{xl: '5rem', md: '3rem', xs: '2rem'}}}>
         Conocé nuestros productos
       </Typography>
 
