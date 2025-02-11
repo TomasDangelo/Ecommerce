@@ -1,11 +1,10 @@
 const User = require("../models/userModel")
-const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 
 const register = async(req, res) =>{ //Nuevo usuario
     try {
-        const hashedPassword = bcrypt.hashSync(req.body.password, 10);  // Bcrypt para proteger la password
+       /*  const hashedPassword = bcrypt.hashSync(req.body.password, 10); */  // Bcrypt para proteger la password
         const newUser = new User({ //Obtener datos del usuario para autenticacion
             username: req.body.username,
             email: req.body.email,
@@ -31,10 +30,10 @@ const login = async(req,res)=>{ // Autenticamos si el usuario existe o no en cas
     if (!user) {
         return res.status(401).json({ message: "Email no encontrado o registrado" });
     }
-    const validPassword = await bcrypt.compare(req.body.password, user.password);
+   /*  const validPassword = await bcrypt.compare(req.body.password, user.password);
     if(!validPassword) {
         return res.status(401).json({ message: "Email o contraseña incorrecta" });
-    }
+    } */
     const token = jwt.sign({ id: user._id, isAdmin: user.isAdmin }, process.env.JWT_KEY, { expiresIn: '5d' }); //JWT -- Autenticación
     const {password, ...info} = user._doc;
 
