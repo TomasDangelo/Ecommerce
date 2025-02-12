@@ -1,45 +1,40 @@
 import React from 'react';
-import { Typography, Container, Box, styled, useMediaQuery, useTheme } from '@mui/material';
+import { Box, useMediaQuery, useTheme, Button, Card, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import ruthLogo from "../assets/ruth-logo.jpg";
-import whatsappLogo from '../assets/logo-instagram.avif';
-import instagramLogo from '../assets/logo-whatsapp.png';
+import instagramLogo from '../assets/Instagram-png.png';
+import whatsappLogo from '../assets/logo-whatsapp.png';
 import pyLogo from '../assets/PedidosYa_logo.png';
+import emailLogo from '../assets/email.jpg';
 
-const Item = styled(Box)(({ theme }) => ({ display: 'flex', alignItems: 'center', marginBottom: theme.spacing(2), '&:last-child': { marginBottom: 0 }
-}));
-
-const MotionImg = styled(motion.img)({ width: '50px', height: '50px', marginRight: '1rem', borderRadius: '10%', objectFit: 'cover', transition: 'transform 0.3s ease-in-out',
-});
+const contacts = [
+  { logo: whatsappLogo, text: "WhatsApp", link: "https://wa.me/message/XFQJ5E5SZ5QGK1" },
+  { logo: instagramLogo, text: "Instagram", link: "https://www.instagram.com/ruthpasteleria/" },
+  { logo: pyLogo, text: "Pedir en PedidosYa", link: "https://www.pedidosya.com.ar/restaurantes/rosario/ruth-pasteleria-856d9f6b-c274-47f9-b449-946733ba3010-menu" },
+  { logo: emailLogo, text: "Email", link: "mailto:ruth.pasteleriartesanal@gmail.com" }
+];
 
 const ContactoPage = () => {
-  const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
+  const isDesktop = useMediaQuery(useTheme().breakpoints.up('md'));
 
   return (
-    <Container sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: 'calc(100vh - 64px)', maxWidth: '900px', p: 4, marginTop: '1rem', borderRadius: '1%', backgroundColor: '#ECD2DB' }}>
-      <motion.div initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} 
-        style={{ width: isDesktop ? '100%' : '90%', margin: '1rem', borderRadius: '1rem', padding: '2rem', boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)', backgroundColor: theme.palette.background.paper }}>
-        
-        <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <motion.img src={ruthLogo} alt="logo-ruthpasteleria" style={{ maxWidth: '200px', borderRadius: '50%', boxShadow: '0px 2px 5px rgba(0, 0, 0, 0.2)' }} whileHover={{ scale: 1.1 }} />
-          <Typography variant="fourth" color="text.secondary" sx={{ fontWeight: 'bold', fontSize: { xl: '4rem', md: '3rem', xs: '2rem' }, mt: 2 }}>Contactanos</Typography>
-
-          {[ 
-            { logo: whatsappLogo, text: "Ver en Instagram", link: "https://www.instagram.com/ruthpasteleria/" },
-            { logo: instagramLogo, text: "Contactar por WhatsApp", link: "https://wa.me/message/XFQJ5E5SZ5QGK1" },
-            { logo: pyLogo, text: "Pedir en PedidosYa", link: "https://www.pedidosya.com.ar/restaurantes/rosario/ruth-pasteleria-856d9f6b-c274-47f9-b449-946733ba3010-menu" }
-          ].map(({ logo, text, link }, i) => (
-            <Item key={i}>
-              <MotionImg src={logo} alt={text} whileHover={{ scale: 1.1 }} />
-              <a href={link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
-                <Typography variant="body1" color="text.primary" sx={{ fontWeight: 500 }}>{text}</Typography>
-              </a>
-            </Item>
+    <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '100vh', 
+    background: 'url(https://previews.123rf.com/images/torriphoto/torriphoto1603/torriphoto160300042/53527623-patr%C3%B3n-sin-fisuras-con-los-dulces-y-pasteler%C3%ADa-linerl-magdalena-macarrones-torta-helado.jpg) center/cover no-repeat ', p: '4rem 2rem' }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 4, bgcolor: 'rgba(255, 255, 255, 0.7)', borderRadius: 2, boxShadow: 3 }}>
+        <motion.img src={ruthLogo} alt="logo-ruthpasteleria" style={{ maxWidth: 180, borderRadius: '50%', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.33)', marginBottom: 16 }} whileHover={{ scale: 1.1 }} />
+        <Typography variant="tenth" color="initial" sx={{fontSize: {xs: '2rem', md: '3rem'}}}>Contactanos!</Typography>
+        <Box sx={{ display: 'grid', gridTemplateColumns: isDesktop ? 'repeat(2, 1fr)' : 'repeat(1, 1fr)', gap: 1, width: '100%' }}>
+          {contacts.map(({ logo, text, link }, i) => (
+            <Box key={i} sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', p: 3, border:'none',  textAlign: 'center', bgcolor: 'rgba(255, 247, 247, 0)' }}>
+              <Button href={link} target="_blank">
+                <motion.img src={logo} alt={text} style={{ width: 60, height: 60, marginBottom: 4, borderRadius: '10%', objectFit: 'cover' }} whileHover={{ scale: 1.1 }} />
+              </Button>
+              <Button href={link} target="_blank" sx={{ textTransform: 'none', fontWeight: 600, fontSize: '1rem', color: 'black', '&:hover': { textDecoration: 'underline' } }}>{text}</Button>
+            </Box>
           ))}
         </Box>
-      </motion.div>
-    </Container>
+      </Box>
+    </Box>
   );
 };
 

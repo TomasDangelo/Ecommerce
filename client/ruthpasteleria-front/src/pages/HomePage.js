@@ -25,26 +25,35 @@ const HomePage = () => {
   return (
     <>
       <CentralSection /> {/* Sección de foto central */}
-      <CategoryFilter allCategories={allCategories} onCategoryChange={handleCategoryChange}/>
+      <CategoryFilter allCategories={allCategories} onCategoryChange={handleCategoryChange} />
 
-      <Typography textAlign="center" variant="h2" color="third" fontWeight="bold" sx={{mt: 1, fontSize:{xl: '5rem', md: '3rem', xs: '2rem'}}}>
-        Conocé nuestros productos
-      </Typography>
+      {/* Contenedor principal para título y tarjetas */}
+<Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: { xs: '0 16px', sm: '0 24px' }, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+  
+  <Typography  textAlign="left"  variant="nineth"  
+    sx={{ mt: 2, mb: 2, marginLeft: {xs:'3rem', md: '1.2rem'}, fontSize: { xl: '3.5rem', md: '2.5rem', xs: '2rem' }, width: '100%' }}>
+    Nuestros productos
+  </Typography>
 
-      <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center', margin: '20px' }}>
-        {filteredProducts && filteredProducts.length > 0 ? (
-          filteredProducts.map(product => (
-            <ProductCard key={product._id} product={product} addToCart={addToCart} hanldeCloseAlert={hanldeCloseAlert} alert={alert}  />
-          ))
-        ) : (
-          <Typography>No hay productos en esta categoría.</Typography>
-        )}
-      </Box>
+  {/* Cards alineadas correctamente */}
+  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, justifyContent: 'center', width: '100%' }}>
+    {filteredProducts.length > 0 ? (
+      filteredProducts.map(product => (
+        <ProductCard key={product._id} product={product} addToCart={addToCart} hanldeCloseAlert={hanldeCloseAlert} alert={alert} />
+      ))
+    ) : (
+      <Typography>No hay productos en esta categoría.</Typography>
+    )}
+  </Box>
+
+</Box>
+
+
       {alert && (
-                <Snackbar open={alert !== null} autoHideDuration={3000} onClose={hanldeCloseAlert} anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}>
-                  <Alert severity={alert?.type} onClose={hanldeCloseAlert}>{alert.message}</Alert>
-                </Snackbar>
-            )}
+        <Snackbar open={alert !== null} autoHideDuration={3000} onClose={hanldeCloseAlert} anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}>
+          <Alert severity={alert?.type} onClose={hanldeCloseAlert}>{alert.message}</Alert>
+        </Snackbar>
+      )}
     </>
   );
 };

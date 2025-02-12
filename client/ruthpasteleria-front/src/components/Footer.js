@@ -3,11 +3,11 @@ import { Typography, Container } from '@mui/material';
 import { motion } from 'framer-motion';
 import instagramLogo from '../assets/logo-whatsapp.png';
 import pyLogo from '../assets/PedidosYa_logo.png';
-import whatsappLogo from '../assets/logo-instagram.avif';
+import whatsappLogo from '../assets/Instagram-png.png';
 
 const Footer = () => {
   return (
-    <footer style={{border: '0.3px solid pink'}}>
+    <footer>
       <Container style={{ padding: '1rem', marginTop: '1rem', textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Typography variant="body2" color="textSecondary" style={{marginRight: '1rem'}}>
           &copy; {new Date().getFullYear()} Ruth Pastelería. Todos los derechos reservados.

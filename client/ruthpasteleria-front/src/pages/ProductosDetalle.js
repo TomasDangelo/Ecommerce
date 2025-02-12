@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import axios from 'axios';
 import ProductCard from '../components/ProductCard';  // Importar el componente ProductCard
+const API_URL = process.env.REACT_APP_API_URL;
 
 const ProductDetail = () => {
   const { id } = useParams();
@@ -12,7 +13,7 @@ const ProductDetail = () => {
   // Cargar detalles del producto
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/products/${id}`)
+      .get(`${API_URL}/api/products/${id}`)
       .then((response) => {
         setProduct(response.data.product);
       })
