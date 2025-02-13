@@ -1,8 +1,10 @@
-import { React, useState, useEffect, useContext } from 'react';
+import { React, useState, useEffect, useContext, lazy, Suspense } from 'react';
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import axios from 'axios';
-import ProductCard from '../components/ProductCard';  // Importar el componente ProductCard
+import { Typography } from '@mui/material';
+
+const ProductCard = lazy(()=> import('../components/ProductCard'))  
 const API_URL = process.env.REACT_APP_API_URL;
 
 const ProductDetail = () => {
@@ -33,10 +35,12 @@ const ProductDetail = () => {
 
   // Usamos ProductCard para mostrar los detalles del producto
   return (
+    <Suspense fallback={<Typography>Cargando...</Typography>}>
+
     <div  style={{ padding: '20px', display: 'flex',  justifyContent: 'center' }}>
-      {/* Pasamos el producto y la función handleAddToCart como prop */}
       <ProductCard  product={product} addToCart={handleAddToCart} toggleView={toggleView} detailView={detailView}/>
     </div>
+    </Suspense>
   );
 };
 
