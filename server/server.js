@@ -16,7 +16,11 @@ app.use(cors({ origin: allowedOrigins, methods: "GET,POST,PUT,DELETE", credentia
 //-----------------------------------------------------------------------------//
 app.use("/", routes);
 app.use("./uploads", express.static("uploads"))
-
+app.use(express.static('public', {
+    maxAge: '1y',
+    etag: false
+  }));
+  
 app.get("/", (req,res)=>{
     res.send("Testeando backend");
 })

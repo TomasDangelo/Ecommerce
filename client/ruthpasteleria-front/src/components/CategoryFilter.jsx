@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, Stack } from '@mui/material';
 
-const CategoryFilter = ({ allCategories, onCategoryChange }) => {
+const CategoryFilter = React.memo(({ allCategories, onCategoryChange }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
 
   const handleCategoryClick = (category) => {
@@ -28,6 +28,6 @@ const CategoryFilter = ({ allCategories, onCategoryChange }) => {
       </Stack>
     </Box>
   );
-};
+});
 
 export default CategoryFilter;

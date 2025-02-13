@@ -6,7 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCartTwoTone';
 import DescriptionIcon from '@mui/icons-material/DescriptionTwoTone';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
 
-const ProductCard = ({ product, addToCart, toggleView, detailView }) => {
+const ProductCard = React.memo(({ product, addToCart, toggleView, detailView }) => {
     const [selectedSize, setSelectedSize] = useState(product.sizes.length > 0 ? product.sizes[0] : null);
     const [isImageOpen, setIsImageOpen] = useState(false);
 
@@ -17,13 +17,14 @@ const ProductCard = ({ product, addToCart, toggleView, detailView }) => {
 
     const handleImageClick = () => setIsImageOpen(true);
     const handleCloseImage = () => setIsImageOpen(false);
+    const optimizeCloudinaryUrl = (url) => { return url.replace("/upload/", "/upload/w_500,h_500,c_fill,q_auto,f_auto/") }
 
     return (
         <>
             <Card sx={{ boxShadow: 'none', borderRadius: 0, width: 280, '&:hover img': { transform: 'scale(1.05)' } }}>
                 <Box sx={{ height: { xs: "180px", sm: "230px", xl: "280px" }, overflow: 'hidden' }}>
                     <LazyLoadImage 
-                        src={product.image || '/default-image.jpg'} 
+                        src={optimizeCloudinaryUrl(product.image) || '/default-image.jpg'} 
                         alt={product.title} 
                         effect='blur' 
                         width="100%"  
@@ -85,6 +86,6 @@ const ProductCard = ({ product, addToCart, toggleView, detailView }) => {
             </Modal>
         </>
     );
-};
+})
 
 export default ProductCard;
