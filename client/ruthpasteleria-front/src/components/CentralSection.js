@@ -3,7 +3,7 @@ import { Box, Typography, Container } from '@mui/material';
 
 const CentralSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
-  const imageUrl = "https://res.cloudinary.com/dui1l3g5y/image/upload/f_auto,q_auto/v1739468946/test2_nur2za.jpg"; 
+  const imageUrl = "https://res.cloudinary.com/dui1l3g5y/image/upload/v1739543016/macarons_nsaqqi.webp"; 
 
   useEffect(() => {
     const observer = new IntersectionObserver(([entry]) => {

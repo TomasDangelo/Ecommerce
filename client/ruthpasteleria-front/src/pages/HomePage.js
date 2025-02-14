@@ -31,7 +31,7 @@ const HomePage = () => {
       </Suspense>
 
       <Box sx={{ maxWidth: '1200px', margin: '0 auto', padding: { xs: '0 16px', sm: '0 24px' }, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        <Typography textAlign="left" variant="nineth"  
+        <Typography textAlign="left" variant="seventh"  
           sx={{ mt: 2, mb: 2, marginLeft: {xs:'3rem', md: '1.2rem'}, fontSize: { xl: '3.5rem', md: '2.5rem', xs: '2rem' }, width: '100%' }}>
           Nuestros productos
         </Typography>

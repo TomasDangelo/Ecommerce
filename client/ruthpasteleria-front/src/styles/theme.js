@@ -25,15 +25,10 @@ const theme = createTheme({
     }
   },
   typography: {
-    primary: {fontFamily: 'Fira Sans'}, 
-    secondary: {fontFamily: 'Tangerine'},
-    third: {fontFamily: 'Gowun Dodum'},
     fourth: {fontFamily: 'Ephesis'},
-    fifth: {fontFamily: 'Whisper'},
-    sixth: {fontFamily: 'Great Vibes'},
     seventh: {fontFamily: 'Forum'},
     eighth: {fontFamily: 'Quicksand'},
-    nineth: {fontFamily: 'Crimson Text'},
+
     tenth: {fontFamily: 'Lato'}
   }
 });

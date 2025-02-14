@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useCallback } from 'react';
 import { Card, CardContent, Typography, Button, FormControl, InputLabel, Select, MenuItem, Modal, Box } from '@mui/material';
 import { Link } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCartTwoTone';
 import DescriptionIcon from '@mui/icons-material/DescriptionTwoTone';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import { CartContext } from '../context/CartContext';
 
-const ProductCard = React.memo(({ product, addToCart, toggleView, detailView }) => {
+
+const ProductCard = React.memo(({ product, toggleView, detailView }) => {
+    const {addToCart} = useContext(CartContext)
     const [selectedSize, setSelectedSize] = useState(product.sizes.length > 0 ? product.sizes[0] : null);
     const [isImageOpen, setIsImageOpen] = useState(false);
 
@@ -15,9 +18,14 @@ const ProductCard = React.memo(({ product, addToCart, toggleView, detailView }) 
         setSelectedSize(size);
     };
 
+    const handleAddToCart = useCallback(() =>{
+        addToCart({ id: product._id, title: product.title, price: selectedSize?.price || product.sizes[0]?.price, size: selectedSize?.size || product.sizes[0]?.size, image: product.image
+        })
+    },[addToCart, product, selectedSize])
+
     const handleImageClick = () => setIsImageOpen(true);
     const handleCloseImage = () => setIsImageOpen(false);
-    const optimizeCloudinaryUrl = (url) => { return url.replace("/upload/", "/upload/w_500,h_500,c_fill,q_auto,f_auto/") }
+    const optimizeCloudinaryUrl = (url) => { return url.replace("/upload/", "/upload/w_500,h_500,c_fill,q_auto,f_webp/") }
 
     return (
         <>
@@ -35,7 +43,7 @@ const ProductCard = React.memo(({ product, addToCart, toggleView, detailView }) 
                 </Box>
                 
                 <CardContent sx={{ p: 1, textAlign: 'left' }}>
-                    <Typography variant="tenth" sx={{ fontWeight: "bold",  fontSize: { xs: '1rem', md: '1.2rem' } }}>{product.title}</Typography>
+                    <Typography variant="eighth" sx={{ fontWeight: "bold",  fontSize: { xs: '1rem', md: '1.2rem' } }}>{product.title}</Typography>
 
                     {product.sizes.length > 0 && (
                         <>
@@ -43,28 +51,22 @@ const ProductCard = React.memo(({ product, addToCart, toggleView, detailView }) 
                                 <InputLabel>Tamaño</InputLabel>
                                 <Select value={selectedSize?.size || ""} onChange={handleSizeChange}>
                                     {product.sizes.map((s) => (
-                                        <MenuItem key={s.size} value={s.size}>{s.size} - <Typography variant="tenth" fontWeight="bold" >${s.price}</Typography> </MenuItem>
+                                        <MenuItem key={s.size} value={s.size}>{s.size} - <Typography variant="eighth" fontWeight="bold" >${s.price}</Typography> </MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>
-                            <Typography variant="tenth" fontWeight="bold" sx={{ mt: 1 }}>Precio: ${selectedSize?.price || product.sizes[0]?.price}</Typography>
+                            <Typography variant="eighth" fontWeight="bold" sx={{ mt: 1 }}>Precio: ${selectedSize?.price || product.sizes[0]?.price}</Typography>
                         </>
                     )}
 
-                    {detailView && <Box sx={{ mt: 1, mb: 1 }}><Typography variant="tenth" >{product.description}</Typography> </Box> }
+                    {detailView && <Box sx={{ mt: 1, mb: 1 }}><Typography variant="eighth" >{product.description}</Typography> </Box> }
 
                     <Button onClick={toggleView} variant="contained" fullWidth sx={{ display: detailView ? 'none' : 'flex', mt: 1 }}>
                         <DescriptionIcon />  
                         <Link to={`/productos/${product._id}`} style={{ textDecoration: 'none', color: 'black', marginLeft: '0.5rem' }}>Ver Detalles</Link>
                     </Button>
 
-                    <Button variant="contained" fullWidth color="fourth" sx={{ mt: 1 }} onClick={() => addToCart({
-                        id: product._id,
-                        title: product.title,
-                        price: selectedSize?.price || product.sizes[0]?.price,
-                        size: selectedSize?.size || product.sizes[0]?.size,
-                        image: product.image
-                    })}>
+                    <Button variant="contained" fullWidth color="fourth" sx={{ mt: 1 }} onClick={handleAddToCart}>
                         <ShoppingCartIcon /> Agregar al carrito
                     </Button>
 

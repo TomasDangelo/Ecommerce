@@ -1,4 +1,4 @@
-import { React, useState, useEffect, useContext, lazy, Suspense } from 'react';
+import { React, useState, useEffect, useContext, lazy, Suspense, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { CartContext } from '../context/CartContext';
 import axios from 'axios';
@@ -27,9 +27,9 @@ const ProductDetail = () => {
   const handleAddToCart = (product) => {
     addToCart(product);
   };
-  const toggleView = () => {
+  const toggleView = useCallback(() => {
     setDetailView(prev => !prev);
-  };
+  },[]);
   
   if (!product) return <h1>Cargando detalles del producto...</h1>;
 

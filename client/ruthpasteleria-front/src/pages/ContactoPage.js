@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, useMediaQuery, useTheme, Button, Card, Typography } from '@mui/material';
+import { Box, useMediaQuery, useTheme, Button, Typography } from '@mui/material';
 import { motion } from 'framer-motion';
 import ruthLogo from "../assets/ruth-logo.jpg";
 import instagramLogo from '../assets/Instagram-png.png';
