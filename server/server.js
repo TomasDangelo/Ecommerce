@@ -15,7 +15,6 @@ app.use(express.json()); //Configuración para aceptar solicitudes json
 app.use(cors({ origin: allowedOrigins, methods: "GET,POST,PUT,DELETE", credentials: true })); // Permite todas las solicitudes CORS
 //-----------------------------------------------------------------------------//
 app.use("/", routes);
-app.use("./uploads", express.static("uploads"))
 app.use(express.static('public', {
     maxAge: '1y',
     etag: false
